@@ -13,12 +13,14 @@
     "build": "node scripts/build.mjs",
     "to-pdf": "node scripts/toPDF.mjs"
   },
-  "devDependencies": {
-    "@types/node": "^18.17.5",
+  "dependencies": {
     "@yandeu/parse-markdown": "^0.0.2",
     "dayjs": "^1.11.7",
-    "npm-run-all": "^4.1.5",
     "puppeteer": "^19.11.1",
     "serve-handler": "^6.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.17.5",
+    "npm-run-all": "^4.1.5"
   }
 }
