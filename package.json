@@ -10,8 +10,8 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:nodemon": "node scripts/build.mjs && npx -y nodemon --watch book --watch scripts --watch src -e mjs,md,html,css --exec \"node scripts/build.mjs\"",
     "dev:serve": "npx -y five-server@latest",
-    "build": "node scripts/build.mjs",
-    "to-pdf": "node scripts/toPDF.mjs"
+    "build": "node ./bin.mjs build",
+    "to-pdf": "node ./bin.mjs to-pdf"
   },
   "dependencies": {
     "@yandeu/parse-markdown": "^0.0.2",
