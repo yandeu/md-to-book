@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 2em 1em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h5,
+p,
+code,
+th,
+td,
+ol,
+ul,
+li {
+  color: black;
+}
+
+hr {
+  /* display: none; */
+  border-color: transparent;
+}
+
+blockquote {
+  border-color: #dcdcdc;
+}
+
+.language-sql .hljs-number {
+  color: green;
+}
+
+.sql-table th,
+.sql-table td {
+  font-size: 20px !important;
+  color: black;
+}
+.sql-table th {
+  font-weight: bold;
+}
+
+p code {
+  padding: 4px 6px;
+  background-color: #f2f2f2;
+}
+
+pre code.hljs {
+  font-size: 17px;
+  padding: 0.5em 1em;
+  border: 1px #e2e2e2 solid;
+}
+
+span.hljs-comment {
+  color: #959595;
+}
+
+td.font-size-16 {
+  font-size: 16px !important;
+}
+
+ol li {
+  list-style: decimal !important;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 11mm 17mm 17mm 17mm;
+  }
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    margin: 8px;
+    padding: unset;
+  }
+  body {
+    /* https://stackoverflow.com/q/14987496 */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+  }
+  pre,
+  blockquote {
+    page-break-inside: avoid;
+  }
+  hr {
+    page-break-after: always;
+  }
+  .pdf-footer {
+    font-size: 18px;
+  }
+}
