@@ -5,6 +5,7 @@ import { dirname, join, resolve } from 'node:path'
 import { parseMarkdown } from '@yandeu/parse-markdown'
 import { getChapters } from './chapters.mjs'
 import { __dirname } from './misc.mjs'
+import { addTimestampToImports } from './cache.mjs'
 
 export const build = async (cwd = process.cwd()) => {
   const book = await getChapters(cwd)
@@ -14,7 +15,7 @@ export const build = async (cwd = process.cwd()) => {
   const BOOK_PATH = join(cwd, 'book')
   const DIST = join(cwd, 'dist')
   const SRC = join(__dirname, '../src')
-  const HTML_TEMPLATE = await fs.readFile(join(SRC, 'template.html'), { encoding: 'utf-8' })
+  const HTML_TEMPLATE = addTimestampToImports(await fs.readFile(join(SRC, 'template.html'), { encoding: 'utf-8' }))
 
   // make dist dir
   await mkdir(DIST, { recursive: true })
@@ -45,7 +46,7 @@ export const build = async (cwd = process.cwd()) => {
   // modify index.html file / remove template.html
   {
     let path = join(DIST, 'index.html')
-    let file = await readFile(path, { encoding: 'utf-8' })
+    let file = addTimestampToImports(await readFile(path, { encoding: 'utf-8' }))
     file = addChapters(file)
     await writeFile(path, file, { encoding: 'utf-8' })
     await rm(join(DIST, 'template.html'))
