@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/pico.css" />
+    <link rel="stylesheet" href="../../css/github.min.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/highlight.min.js"></script>
+  </head>
+  <body>
+    <section>{{md}}</section>
+
+    <script>
+      hljs.highlightAll()
+    </script>
+
+    <!-- empty blockquote for writing -->
+    <script>
+      const q = document.querySelectorAll('blockquote')
+      q.forEach(r => {
+        if (r.innerHTML.trim().length === 0) {
+          r.style.height = '5em'
+        }
+      })
+    </script>
+
+    <!-- add class to the sql tables -->
+    <!-- adjust style of NULL fields -->
+    <script>
+      const tables = /* @type Array<HTMLTableElement> */ Array.from(document.getElementsByTagName('table'))
+      tables.forEach(table => {
+        const th = table.querySelector('th')
+        if (th.innerHTML === 'id') table.classList.add('sql-table')
+        const tds = /* @type Array<HTMLTableCellElement> */ Array.from(table.querySelectorAll('td'))
+        tds.forEach(td => {
+          if (td.innerHTML === 'NULL') {
+            td.innerHTML = '[NULL]'
+            td.style.fontFamily = 'monospace'
+            td.style.color = '#7f7f7f'
+            td.classList.add('font-size-16')
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
