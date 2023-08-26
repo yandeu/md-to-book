@@ -43,7 +43,10 @@ blockquote {
   font-weight: bold;
 }
 
-p code {
+p code,
+li code,
+table code {
+  line-height: 1;
   padding: 4px 6px;
   background-color: #f2f2f2;
 }
