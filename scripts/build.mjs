@@ -62,7 +62,8 @@ export const build = async (cwd = process.cwd()) => {
 
       try {
         const data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
-        const md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
+        let md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
+        md.markdown = `<a href="../../">< back to overview</a>` + md.markdown
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
