@@ -10,3 +10,5 @@ Some text.
 let hello = "JavaScript";
 console.log(hello);
 ```
+
+![](./img/blue-bird.jpg)

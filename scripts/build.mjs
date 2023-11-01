@@ -4,7 +4,7 @@ import fs, { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { parseMarkdown } from '@yandeu/parse-markdown'
 import { getChapters } from './chapters.mjs'
-import { __dirname } from './misc.mjs'
+import { __dirname, copyAllFiles } from './misc.mjs'
 import { addTimestampToImports } from './cache.mjs'
 
 export const build = async (cwd = process.cwd()) => {
@@ -73,4 +73,8 @@ export const build = async (cwd = process.cwd()) => {
       }
     }
   }
+
+  // copy all files
+  await copyAllFiles(BOOK_PATH, join(DIST, 'book'), /\/\.|\.js$|\.mjs$|\.md$/)
+  console.log('done')
 }
