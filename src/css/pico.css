@@ -2011,33 +2011,6 @@ progress[value]::-webkit-progress-value {
 progress::-moz-progress-bar {
   background-color: var(--progress-color);
 }
-@media (prefers-reduced-motion: no-preference) {
-  progress:indeterminate {
-    background: var(--progress-background-color)
-      linear-gradient(to right, var(--progress-color) 30%, var(--progress-background-color) 30%) top left/150% 150%
-      no-repeat;
-    animation: progress-indeterminate 1s linear infinite;
-  }
-  progress:indeterminate[value]::-webkit-progress-value {
-    background-color: transparent;
-  }
-  progress:indeterminate::-moz-progress-bar {
-    background-color: transparent;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  [dir='rtl'] progress:indeterminate {
-    animation-direction: reverse;
-  }
-}
-@keyframes progress-indeterminate {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
 details[role='list'],
 li[role='list'] {
   position: relative;
@@ -2498,18 +2471,5 @@ textarea {
 }
 [dir='rtl'] {
   direction: rtl;
-}
-@media (prefers-reduced-motion: reduce) {
-  :not([aria-busy='true']),
-  :not([aria-busy='true'])::after,
-  :not([aria-busy='true'])::before {
-    background-attachment: initial !important;
-    animation-duration: 1ms !important;
-    animation-delay: -1ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-delay: 0s !important;
-    transition-duration: 0s !important;
-  }
 }
 /*# sourceMappingURL=pico.min.css.map */
