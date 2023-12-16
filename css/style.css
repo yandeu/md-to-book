@@ -1,24 +1,63 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  background-color: var(--theme-background);
+  color: var(--theme-text);
   padding: 2em 1em;
   max-width: 800px;
   margin: 0 auto;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h5,
-p,
-code,
-th,
-td,
-ol,
-ul,
-li {
-  color: black;
+a {
+  text-decoration: none;
+  color: var(--theme-hyperlink);
+}
+
+code {
+  background-color: var(--theme-inline-code);
+  padding: 1.5px 3px;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+table {
+  border: 1px var(--theme-table-border) solid;
+  border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-indent: 0;
+  text-align: left;
+}
+table th,
+table td {
+  border-bottom: 1px var(--theme-table-border) solid;
+  padding: 8px;
+}
+table th {
+  font-weight: bold;
+}
+
+.chapters-list {
+  padding-inline-start: 0px;
+}
+
+.chapters-list ol {
+  margin: 0;
+  padding: 0;
+  border-left: 1px gray solid;
+  padding-inline-start: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.chapters-list > li {
+  list-style-type: none;
+}
+.chapters-list li {
+  margin-left: 12px;
+}
+.chapters-list > li {
+  margin-left: 0px;
 }
 
 hr {
@@ -26,13 +65,15 @@ hr {
   border-color: transparent;
 }
 
+/* old */
+
 blockquote {
   border-color: #dcdcdc;
 }
 
-.language-sql .hljs-number {
+/* .language-sql .hljs-number {
   color: green;
-}
+} */
 
 .sql-table th,
 .sql-table td {
@@ -43,12 +84,18 @@ blockquote {
   font-weight: bold;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  border-style: none;
+}
+
 p code,
 li code,
 table code {
   line-height: 1;
   padding: 4px 6px;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 }
 
 pre code.hljs {
@@ -57,17 +104,17 @@ pre code.hljs {
   border: 1px #e2e2e2 solid;
 }
 
-span.hljs-comment {
+/* span.hljs-comment {
   color: #959595;
-}
+} */
 
-td.font-size-16 {
+/* td.font-size-16 {
   font-size: 16px !important;
-}
+} */
 
-ol li {
+/* ol li {
   list-style: decimal !important;
-}
+} */
 
 @media print {
   @page {
