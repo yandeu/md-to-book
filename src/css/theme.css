@@ -1,0 +1,39 @@
+:root {
+  --theme-background: #ffffff;
+  --theme-text: #161616;
+  --theme-hyperlink: #0065b3;
+  --theme-inline-code: #e6e6e6;
+  --theme-table-border: #d2d2d2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --theme-background: #171717;
+    --theme-text: #e6e6e6;
+    --theme-hyperlink: #75b6e7;
+    --theme-inline-code: #404040;
+    --theme-table-border: #505050;
+  }
+}
+
+/* exactly the same content as the block above */
+:root[data-theme='dark'] {
+  --theme-background: #171717;
+  --theme-text: #e6e6e6;
+  --theme-hyperlink: #75b6e7;
+  --theme-inline-code: #404040;
+  --theme-table-border: #505050;
+}
+
+:root[data-theme='contrast'] {
+  --theme-background: #000000;
+  --theme-text: #ffffff;
+  --theme-hyperlink: #ff0;
+  --theme-inline-code: #2f2f2f;
+  --theme-table-border: #ffffff;
+}
+
+body {
+  transition-property: background-color, color;
+  transition-duration: 500ms;
+}
