@@ -75,9 +75,12 @@ table th {
   margin: 0;
   padding: 0;
   border-left: 1px gray solid;
-  padding-inline-start: 16px;
+  padding-inline-start: 0px;
   margin-top: 8px;
   margin-bottom: 8px;
+  list-style-type: decimal;
+  list-style-position: inside;
+  line-height: 1.5;
 }
 .chapters-list > li {
   list-style-type: none;
