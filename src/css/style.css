@@ -7,6 +7,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   font-size: 18px;
+  line-height: 1.6;
 }
 
 h1 {
@@ -36,17 +37,6 @@ small {
 a {
   text-decoration: none;
   color: var(--theme-hyperlink);
-}
-
-code {
-  background-color: var(--theme-inline-code);
-  padding: 1.5px 3px;
-  border-radius: 3px;
-  font-weight: 400;
-}
-
-pre > code {
-  line-height: 1.5;
 }
 
 table {
@@ -122,12 +112,16 @@ img {
   border-style: none;
 }
 
-p code,
-li code,
-table code {
-  line-height: 1;
-  padding: 4px 6px;
-  /* background-color: #f2f2f2; */
+code {
+  background-color: var(--theme-inline-code);
+  word-wrap: break-word;
+  border-radius: 3px;
+  padding: 0.1em 0.2em;
+  font-size: 85%;
+}
+
+pre > code {
+  line-height: 1.5;
 }
 
 pre code.hljs {
