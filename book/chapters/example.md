@@ -15,4 +15,8 @@ let hello = "JavaScript";
 console.log(hello);
 ```
 
+| test | test |
+| ---- | ---- |
+| test | test |
+
 ![](./img/blue-bird.jpg)

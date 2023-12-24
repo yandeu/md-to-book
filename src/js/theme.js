@@ -2,31 +2,52 @@
 
 {
   let index = 0
-  const themes = ['light', 'dark', 'contrast']
+  const font = ['default', 'literata']
+  index = parseInt(localStorage.getItem('font') || index.toString())
+
+  const adjustFont = () => {
+    const html = document.querySelector('html')
+    html?.setAttribute('data-font', font[index % 2])
+    localStorage.setItem('font', (index % 2).toString())
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const toggleTheme = document.getElementById('toggle-font')
+    toggleTheme?.addEventListener('click', () => {
+      index++
+      adjustFont()
+    })
+  })
+  adjustFont()
+}
+
+{
+  let index = 0
+  const themes = ['light', 'read', 'dark', 'contrast']
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   if (prefersDark) index = 1
   index = parseInt(localStorage.getItem('theme') || index.toString())
 
   const adjustTheme = () => {
-    localStorage.setItem('theme', (index % 3).toString())
+    localStorage.setItem('theme', (index % 4).toString())
 
-    const setDataTheme = theme => {
-      const html = document.querySelector('html')
-      html?.setAttribute('data-theme', theme)
-    }
+    console.log(themes[index % 4] === 'read')
 
-    document.querySelector(`link[title="${themes[index % 3]}-theme"]`)?.removeAttribute('disabled')
+    if (themes[index % 4] !== 'read') {
+      document.querySelector(`link[title="${themes[index % 4]}-theme"]`)?.removeAttribute('disabled')
 
-    for (const t in themes) {
-      if (+t === index % 3) {
-      } else {
-        setTimeout(() => {
-          document.querySelector(`link[title="${themes[t]}-theme"]`)?.setAttribute('disabled', 'disabled')
-        }, 50)
+      for (const t in themes) {
+        if (+t === index % 4) {
+        } else {
+          setTimeout(() => {
+            document.querySelector(`link[title="${themes[t]}-theme"]`)?.setAttribute('disabled', 'disabled')
+          }, 50)
+        }
       }
     }
 
-    setDataTheme(themes[index % 3])
+    const html = document.querySelector('html')
+    html?.setAttribute('data-theme', themes[index % 4])
   }
 
   adjustTheme()
