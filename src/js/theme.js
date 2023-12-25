@@ -25,7 +25,7 @@
   let index = 0
   const themes = ['light', 'read', 'dark', 'contrast']
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  if (prefersDark) index = 1
+  if (prefersDark) index = 2
   index = parseInt(localStorage.getItem('theme') || index.toString())
 
   const adjustTheme = () => {
