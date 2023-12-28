@@ -63,7 +63,33 @@ export const build = async (cwd = process.cwd()) => {
       try {
         const data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
         let md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
-        md.markdown = `<a href="../../">< back to overview</a>` + md.markdown
+
+        // html-to-ssml (experimental)
+        {
+          let x = md.markdown
+          // replace h1-h6 and p with s
+          x = x.replace(/(<\/?)(h[1|2|3|4|5|6]|p)(>)/g, (s, m1, m2, m3, m4) => {
+            return m1 + 's' + m3
+          })
+          // remove ul, table and pre
+          x = x.replace(/<(ul|table|pre)>.+?<\/\1>/gms, '')
+          // remove img
+          x = x.replace(/<(img).+?>/gms, '')
+          // remove all non-s tags
+          x = x.replace(/<\/?(.+?)>/gms, (s, m1) => {
+            if (m1 === 's') return s
+            else return ''
+          })
+          // remove empty s tags
+          x = x.replace(/<s><\/s>/gms, '')
+          const ssml = '<speak>' + x + '</speak>'
+          // console.log(ssml)
+        }
+
+        md.markdown =
+          `<a href="../../">< back to overview</a>` +
+          `<div id="audio-bar"><audio controls src="../../audio/${p.directory}/${FILE_NAME}.mp3"></audio></div>` +
+          md.markdown
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
