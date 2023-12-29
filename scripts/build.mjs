@@ -65,6 +65,7 @@ export const build = async (cwd = process.cwd()) => {
         let md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
 
         // html-to-ssml (experimental)
+        let audioFileUrl = ''
         {
           let x = md.markdown
           // replace h1-h6 and p with s
@@ -83,13 +84,27 @@ export const build = async (cwd = process.cwd()) => {
           // remove empty s tags
           x = x.replace(/<s><\/s>/gms, '')
           const ssml = '<speak>' + x + '</speak>'
-          // console.log(ssml)
+
+          try {
+            const { CLOUD_FRONT_URL, POLLY_LAMBDA_URL, POLLY_LAMBDA_KEY } = process.env
+            if (CLOUD_FRONT_URL && POLLY_LAMBDA_URL && POLLY_LAMBDA_KEY) {
+              const res = await fetch(POLLY_LAMBDA_URL, {
+                method: 'POST',
+                headers: {
+                  'x-api-key': POLLY_LAMBDA_KEY
+                },
+                body: JSON.stringify({ ssml })
+              })
+              const json = await res.json()
+              const { file } = json
+              audioFileUrl = 'https://' + CLOUD_FRONT_URL + '/' + file
+              audioFileUrl = `<div id="audio-bar"><audio controls src="${audioFileUrl}"></audio></div>`
+            }
+          } catch (error) {}
         }
 
-        md.markdown =
-          `<a href="../../">< back to overview</a>` +
-          `<div id="audio-bar"><audio controls src="../../audio/${p.directory}/${FILE_NAME}.mp3"></audio></div>` +
-          md.markdown
+        md.markdown = `<a href="../../">< back to overview</a>` + audioFileUrl + md.markdown
+
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
