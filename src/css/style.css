@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--theme-font-family);
   background-color: var(--theme-background);
@@ -7,6 +11,10 @@ body {
   margin: 0 auto;
   font-size: 18px;
   line-height: 1.6;
+}
+
+section {
+  margin-bottom: 3em;
 }
 
 h1 {
@@ -141,6 +149,22 @@ pre code.hljs {
   list-style: decimal !important;
 } */
 
+/* audio bar */
+#audio-bar.is-active {
+  width: 100%;
+  background: #e2e2e2;
+  padding: 8px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}
+#audio-bar.is-active audio {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* print */
 @media print {
   @page {
     size: A4;

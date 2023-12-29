@@ -63,7 +63,48 @@ export const build = async (cwd = process.cwd()) => {
       try {
         const data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
         let md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
-        md.markdown = `<a href="../../">< back to overview</a>` + md.markdown
+
+        // html-to-ssml (experimental)
+        let audioFileUrl = ''
+        {
+          let x = md.markdown
+          // replace h1-h6 and p with s
+          x = x.replace(/(<\/?)(h[1|2|3|4|5|6]|p)(>)/g, (s, m1, m2, m3, m4) => {
+            return m1 + 's' + m3
+          })
+          // remove ul, table and pre
+          x = x.replace(/<(ul|table|pre)>.+?<\/\1>/gms, '')
+          // remove img
+          x = x.replace(/<(img).+?>/gms, '')
+          // remove all non-s tags
+          x = x.replace(/<\/?(.+?)>/gms, (s, m1) => {
+            if (m1 === 's') return s
+            else return ''
+          })
+          // remove empty s tags
+          x = x.replace(/<s><\/s>/gms, '')
+          const ssml = '<speak>' + x + '</speak>'
+
+          try {
+            const { CLOUD_FRONT_URL, POLLY_LAMBDA_URL, POLLY_LAMBDA_KEY } = process.env
+            if (CLOUD_FRONT_URL && POLLY_LAMBDA_URL && POLLY_LAMBDA_KEY) {
+              const res = await fetch(POLLY_LAMBDA_URL, {
+                method: 'POST',
+                headers: {
+                  'x-api-key': POLLY_LAMBDA_KEY
+                },
+                body: JSON.stringify({ ssml })
+              })
+              const json = await res.json()
+              const { file } = json
+              audioFileUrl = 'https://' + CLOUD_FRONT_URL + '/' + file
+              audioFileUrl = `<div id="audio-bar"><audio controls src="${audioFileUrl}"></audio></div>`
+            }
+          } catch (error) {}
+        }
+
+        md.markdown = `<a href="../../">< back to overview</a>` + audioFileUrl + md.markdown
+
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
