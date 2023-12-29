@@ -96,11 +96,14 @@ export const build = async (cwd = process.cwd()) => {
                 body: JSON.stringify({ ssml })
               })
               const json = await res.json()
-              const { file } = json
-              audioFileUrl = 'https://' + CLOUD_FRONT_URL + '/' + file
-              audioFileUrl = `<div id="audio-bar"><audio controls src="${audioFileUrl}"></audio></div>`
+              const { audio, marks } = json
+              const audioMarksUrl = 'https://' + CLOUD_FRONT_URL + '/' + marks
+              audioFileUrl = 'https://' + CLOUD_FRONT_URL + '/' + audio
+              audioFileUrl = `<div id="audio-bar" data-marks-url="${audioMarksUrl}"><audio controls src="${audioFileUrl}"></audio></div>`
             }
-          } catch (error) {}
+          } catch (e) {
+            console.log(e.message)
+          }
         }
 
         md.markdown = `<a href="../../">< back to overview</a>` + audioFileUrl + md.markdown
