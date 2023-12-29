@@ -27,6 +27,10 @@ jobs:
 
       - name: Build Packages
         run: npm run build
+        env:
+          POLLY_LAMBDA_URL: ${{ secrets.POLLY_LAMBDA_URL }}
+          POLLY_LAMBDA_KEY: ${{ secrets.POLLY_LAMBDA_KEY }}
+          CLOUD_FRONT_URL: ${{ secrets.CLOUD_FRONT_URL }}
 
       - name: Build PDF
         run: npm run to-pdf
