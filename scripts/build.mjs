@@ -120,7 +120,7 @@ export const build = async (cwd = process.cwd()) => {
           }
         }
 
-        md.markdown = `<a href="../../">< back to overview</a>` + audioFileUrl + md.markdown
+        md.markdown = `<a class="no-print" href="../../">< back to overview</a>` + audioFileUrl + md.markdown
 
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')

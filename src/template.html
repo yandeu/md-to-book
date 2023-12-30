@@ -15,8 +15,11 @@
     <script src="../../js/highlight.min.js?v=1.0"></script>
   </head>
   <body>
-    <button style="float: right" id="toggle-theme">theme</button>
-    <button style="float: right" id="toggle-font">font</button>
+    <div class="no-print" style="float: right">
+      <button id="toggle-theme"><img src="../../icons/mdi/palette.svg" /></button>
+      <button id="toggle-font"><img src="../../icons/mdi/custom_typography.svg" /></button>
+    </div>
+
     <section>{{md}}</section>
 
     <script>

@@ -197,4 +197,8 @@ pre code.hljs {
   .pdf-footer {
     font-size: 18px;
   }
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
 }
