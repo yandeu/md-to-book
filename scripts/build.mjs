@@ -113,7 +113,7 @@ export const build = async (cwd = process.cwd()) => {
               const { audio, marks } = json
               const audioMarksUrl = 'https://' + CLOUD_FRONT_URL + '/' + marks
               audioFileUrl = 'https://' + CLOUD_FRONT_URL + '/' + audio
-              audioFileUrl = `<div id="audio-bar" data-marks-url="${audioMarksUrl}"><audio controls src="${audioFileUrl}"></audio></div>`
+              audioFileUrl = `<div id="audio-bar" class="no-print" data-marks-url="${audioMarksUrl}"><audio controls src="${audioFileUrl}"></audio></div>`
             }
           } catch (e) {
             console.log(e.message)

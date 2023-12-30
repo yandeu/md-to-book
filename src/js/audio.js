@@ -7,18 +7,33 @@
     const audio = /** @type {HTMLAudioElement} */ (audioBar.firstChild)
     if (!audio) return
 
+    const audioToggle = /** @type {HTMLButtonElement} */ (document.getElementById('toggle-play'))
+    if (audioToggle) {
+      audioToggle.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play()
+        } else {
+          audio.pause()
+        }
+      })
+    }
+
     const audioMarksUrl = audioBar.getAttribute('data-marks-url')
     if (audioMarksUrl) {
       try {
         const res = await fetch(audioMarksUrl)
         const str = '[' + (await res.text()).split('\n').join(',').slice(0, -1) + ']'
         const json = JSON.parse(str)
+        const ssml_heading = json.filter(a => a.value === 'heading')
 
-        // listen to clicks on h1-h3
-        const headings = /** @type {NodeListOf<HTMLHeadingElement>} */ (document.querySelectorAll('h1, h2, h3'))
-        headings.forEach(heading => {
+        // listen to clicks on h1-h6
+        const headings = /** @type {NodeListOf<HTMLHeadingElement>} */ (
+          document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+        )
+
+        headings.forEach((heading, index) => {
           heading.addEventListener('click', () => {
-            const f = json.find(j => j.value === heading.innerText)
+            const f = ssml_heading[index]
             if (f) {
               audio.currentTime = f.time / 1000
               audio.play()
