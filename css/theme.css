@@ -27,6 +27,10 @@
     --theme-hyperlink: #75b6e7;
     --theme-inline-code: #404040;
     --theme-table-border: #505050;
+
+    & code.language-js.hljs.language-javascript {
+      border-color: var(--theme-table-border);
+    }
   }
 }
 
@@ -37,6 +41,10 @@
   --theme-hyperlink: #75b6e7;
   --theme-inline-code: #404040;
   --theme-table-border: #505050;
+
+  & code.language-js.hljs.language-javascript {
+    border-color: var(--theme-table-border);
+  }
 }
 
 :root[data-theme='read'] {
@@ -44,6 +52,10 @@
   --theme-text: #5f4b32;
   --theme-inline-code: #d7d1c5;
   --theme-table-border: #d7d1c5;
+
+  & code.language-js.hljs.language-javascript {
+    background-color: #fff9ea;
+  }
 }
 
 :root[data-theme='contrast'] {
