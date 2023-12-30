@@ -41,6 +41,7 @@
 
 :root[data-theme='read'] {
   --theme-background: #fbf0d9;
+  --theme-text: #5f4b32;
   --theme-inline-code: #d7d1c5;
   --theme-table-border: #d7d1c5;
 }
