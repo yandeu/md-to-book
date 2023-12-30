@@ -150,7 +150,11 @@ pre code.hljs {
 } */
 
 /* audio bar */
+#audio-bar {
+  display: none;
+}
 #audio-bar.is-active {
+  display: unset;
   width: 100%;
   background: #e2e2e2;
   padding: 8px;
