@@ -68,22 +68,36 @@ export const build = async (cwd = process.cwd()) => {
         let audioFileUrl = ''
         {
           let x = md.markdown
-          // replace h1-h6 and p with s
-          x = x.replace(/(<\/?)(h[1|2|3|4|5|6]|p)(>)/g, (s, m1, m2, m3, m4) => {
-            return m1 + 's' + m3
+          // replace h1-h6 with p and mark
+          x = x.replace(/(<\/?)(h[1|2|3|4|5|6])(>)/g, (str, m1, m2, m3, m4) => {
+            if (m1 === '<') return m1 + 'p' + m3 + '<mark name="heading"/>'
+            else return m1 + 'p' + m3
           })
-          // remove ul, table and pre
-          x = x.replace(/<(ul|table|pre)>.+?<\/\1>/gms, '')
+          // remove table and pre
+          x = x.replace(/<(table|pre)>.+?<\/\1>/gms, '')
+          /*
+            // TODO:(yandeu) Make nested lists work 
+            // ul/ol to p; li to s
+            x = x.replace(/(<\/?)(ul|ol|li)(\/?>)/gms, (str, m1, m2, m3) => {
+              if (m2 == 'li') return m1 + 's' + m3
+              else return m1 + 'p' + m3
+            })
+          */
+          x = x.replace(/<(ul|ol)>.+?<\/\1>/gms, '')
           // remove img
           x = x.replace(/<(img).+?>/gms, '')
-          // remove all non-s tags
-          x = x.replace(/<\/?(.+?)>/gms, (s, m1) => {
-            if (m1 === 's') return s
+          // remove all non ssml tags
+          x = x.replace(/<\/?(.+?)\/?>/gms, (str, m1) => {
+            if (m1 === 's' || m1 === 'p' || m1 === 'mark name="heading"') return str
             else return ''
           })
-          // remove empty s tags
+          // remove empty s and p tags
           x = x.replace(/<s><\/s>/gms, '')
-          const ssml = '<speak>' + x + '</speak>'
+          x = x.replace(/<p><\/p>/gms, '')
+          const ssml = ('<speak>\n' + x + '\n</speak>')
+            .split('\n')
+            .filter(l => l.length > 0)
+            .join('\n')
 
           try {
             const { CLOUD_FRONT_URL, POLLY_LAMBDA_URL, POLLY_LAMBDA_KEY } = process.env

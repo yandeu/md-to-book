@@ -16,3 +16,10 @@ Website: [https://yandeu.github.io/md-to-book/](https://yandeu.github.io/md-to-b
 md-to-book build
 md-to-book to-pdf
 ```
+
+## Helpers
+
+```console
+# (linux) export environment variables inside .env
+export $(xargs < .env)
+```
