@@ -129,6 +129,9 @@ export const build = async (cwd = process.cwd()) => {
 
         md.markdown = `<a class="no-print" href="../../">< back to overview</a>` + audioFileUrl + md.markdown
 
+        // add lazy loading to images (https://web.dev/articles/browser-level-image-lazy-loading)
+        md.markdown = md.markdown.replace(/(<img\ssrc=")/gm, _ => '<img loading="lazy" class="lazyload" data-src="')
+
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
