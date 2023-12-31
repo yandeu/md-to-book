@@ -55,7 +55,7 @@ console.log(hello);
 
 
 <table><thead><tr><th>test</th><th>test</th></tr></thead><tbody><tr><td>test</td><td>test</td></tr></tbody></table>
-<p><img src="./img/blue-bird.jpg" alt=""></p></section>
+<p><img loading="lazy" class="lazyload" data-src="./img/blue-bird.jpg" alt=""></p></section>
 
     <script>
       hljs.highlightAll()
@@ -89,5 +89,7 @@ console.log(hello);
         })
       })
     </script>
+    <!-- lazy load images -->
+    <script src="../../lib/lazysizes.min.js?v=5.1.2"></script>
   </body>
 </html>
