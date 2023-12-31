@@ -60,9 +60,9 @@ a {
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
+  border: 1px var(--theme-table-border) solid;
 }
 table {
-  border: 1px var(--theme-table-border) solid;
   border-collapse: collapse;
   width: 100%;
   border-collapse: collapse;
@@ -70,9 +70,14 @@ table {
   text-indent: 0;
   text-align: left;
 }
+table thead tr {
+  border-bottom: 1px var(--theme-table-border) solid;
+}
+table tbody tr:not(:last-child) {
+  border-bottom: 1px var(--theme-table-border) solid;
+}
 table th,
 table td {
-  border-bottom: 1px var(--theme-table-border) solid;
   padding: 8px;
 }
 table th {
