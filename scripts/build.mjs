@@ -62,11 +62,14 @@ export const build = async (cwd = process.cwd()) => {
 
       try {
         const data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
-        let md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
+        const md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
 
         // html-to-ssml (experimental)
         let audioFileUrl = ''
         {
+          // flatten lists (easier to make readable by polly)
+          const data_mod = data.replace(/^(\s{2,})(-\s.*)$/gm, (str, m1, m2) => m2)
+          const md = await parseMarkdown(data_mod) // Promise<{ markdown: string; yaml: {}; }>
           let x = md.markdown
           // replace h1-h6 with p and mark
           x = x.replace(/(<\/?)(h[1|2|3|4|5|6])(>)/g, (str, m1, m2, m3, m4) => {
@@ -75,15 +78,19 @@ export const build = async (cwd = process.cwd()) => {
           })
           // remove table and pre
           x = x.replace(/<(table|pre)>.+?<\/\1>/gms, '')
-          /*
-            // TODO:(yandeu) Make nested lists work 
-            // ul/ol to p; li to s
-            x = x.replace(/(<\/?)(ul|ol|li)(\/?>)/gms, (str, m1, m2, m3) => {
-              if (m2 == 'li') return m1 + 's' + m3
-              else return m1 + 'p' + m3
-            })
-          */
-          x = x.replace(/<(ul|ol)>.+?<\/\1>/gms, '')
+          // ul/ol to p; li to s
+          x = x.replace(/(<\/?)(ul|ol|li)(\/?>)/gms, (str, m1, m2, m3) => {
+            if (m2 == 'li') return m1 + 's' + m3
+            else return m1 + 'p' + m3
+          })
+
+          {
+            // remove nested p (https://stackoverflow.com/a/42367252)
+            // x = x.replace(/(.*<p>)(((?!<\/p>).)*?)(<p>)(.*?)(<\/p>)(.*)/gms, (str, ...m) => {
+            //   return m[0] + m[1] + m[4] + m[5]
+            // })
+          }
+
           // remove img
           x = x.replace(/<(img).+?>/gms, '')
           // remove all non ssml tags

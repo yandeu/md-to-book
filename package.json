@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "dev": "npm-run-all --parallel dev:*",
     "dev:nodemon": "node scripts/build.mjs && npx -y nodemon --watch book --watch scripts --watch src -e mjs,md,html,css --exec \"node scripts/build.mjs\"",
-    "dev:serve": "npx -y five-server@latest",
+    "dev:serve": "npx -y five-server@latest --wait=500",
     "build": "node ./bin.mjs build",
     "to-pdf": "node ./bin.mjs to-pdf"
   },

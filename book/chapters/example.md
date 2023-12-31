@@ -4,6 +4,8 @@ Some text.
 
 - list
 - list
+  - nested item
+  - nested item
 - list
 
 A paragraph with `code` in between.
