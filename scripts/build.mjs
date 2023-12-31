@@ -132,6 +132,13 @@ export const build = async (cwd = process.cwd()) => {
         // add lazy loading to images (https://web.dev/articles/browser-level-image-lazy-loading)
         md.markdown = md.markdown.replace(/(<img\ssrc=")/gm, _ => '<img loading="lazy" class="lazyload" data-src="')
 
+        // wrap table inside div
+        md.markdown = md.markdown.replace(/<(\/?)table>/gm, (str, m1) => {
+          console.log(str)
+          if (!m1) return '<div class="table-wrapper">' + str
+          else return str + '</div>'
+        })
+
         const html = HTML_TEMPLATE.replace('{{md}}', md.markdown).replace('{{chapter}}', CHAPTER_NR.toString())
         const outfile = join(DIST, 'book', p.directory, FILE_NAME + '.html')
         await fs.mkdir(dirname(outfile), { recursive: true })
