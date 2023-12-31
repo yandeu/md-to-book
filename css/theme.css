@@ -28,7 +28,7 @@
     --theme-inline-code: #404040;
     --theme-table-border: #505050;
 
-    & code.language-js.hljs.language-javascript {
+    & code.hljs {
       border-color: var(--theme-table-border);
     }
   }
@@ -42,7 +42,7 @@
   --theme-inline-code: #404040;
   --theme-table-border: #505050;
 
-  & code.language-js.hljs.language-javascript {
+  & code.hljs {
     border-color: var(--theme-table-border);
   }
 }
@@ -53,7 +53,7 @@
   --theme-inline-code: #d7d1c5;
   --theme-table-border: #d7d1c5;
 
-  & code.language-js.hljs.language-javascript {
+  & code.hljs {
     background-color: #fff9ea;
   }
 }
