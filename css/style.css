@@ -46,6 +46,10 @@ a {
   color: var(--theme-hyperlink);
 }
 
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
 table {
   border: 1px var(--theme-table-border) solid;
   border-collapse: collapse;
