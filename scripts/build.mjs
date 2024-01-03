@@ -134,7 +134,6 @@ export const build = async (cwd = process.cwd()) => {
 
         // wrap table inside div
         md.markdown = md.markdown.replace(/<(\/?)table>/gm, (str, m1) => {
-          console.log(str)
           if (!m1) return '<div class="table-wrapper">' + str
           else return str + '</div>'
         })
