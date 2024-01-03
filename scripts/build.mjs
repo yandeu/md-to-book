@@ -79,9 +79,9 @@ export const build = async (cwd = process.cwd()) => {
           // remove table and pre
           x = x.replace(/<(table|pre)>.+?<\/\1>/gms, '')
           // ul/ol to p; li to s
-          x = x.replace(/(<\/?)(ul|ol|li)(\/?>)/gms, (str, m1, m2, m3) => {
-            if (m2 == 'li') return m1 + 's' + m3
-            else return m1 + 'p' + m3
+          x = x.replace(/(<\/?)(ul|ol|li)([^>]+)?(\/?>)/gms, (str, m1, m2, m3, m4) => {
+            if (m2 == 'li') return m1 + 's' + m4
+            else return m1 + 'p' + m4
           })
 
           {
