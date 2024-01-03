@@ -124,15 +124,6 @@ blockquote {
   color: green;
 } */
 
-.sql-table th,
-.sql-table td {
-  font-size: 20px !important;
-  color: black;
-}
-.sql-table th {
-  font-weight: bold;
-}
-
 img {
   max-width: 100%;
   height: auto;
