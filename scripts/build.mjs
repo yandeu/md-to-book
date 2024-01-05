@@ -61,7 +61,20 @@ export const build = async (cwd = process.cwd()) => {
       const CHAPTER_NR = index
 
       try {
-        const data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
+        let data = await fs.readFile(join(BOOK_PATH, p.directory, FILE_NAME + '.md'), { encoding: 'utf-8' })
+
+        // [...] syntax experiment
+        {
+          // data = data.replace(
+          //   /\[input=textarea\]/gm,
+          //   '<textarea autocorrect="off" autocapitalize="off" spellcheck="false" rows="4" cols="50"></textarea>'
+          // )
+          data = data.replace(
+            /\[editable=code\/sql\]/gm,
+            '<div class="editable">\n\n```sql\nSELECT * FROM users;\n```\n\n</div>'
+          )
+        }
+
         const md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>
 
         // html-to-ssml (experimental)
