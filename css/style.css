@@ -57,6 +57,17 @@ a {
   color: var(--theme-hyperlink);
 }
 
+input,
+textarea {
+  color: var(--theme-text);
+  background-color: var(--theme-background-elements);
+  border: 1px var(--theme-table-border) solid;
+  font-size: 18px;
+  width: 100%;
+  line-height: 1.5;
+  padding: 8.5px 17px;
+}
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
