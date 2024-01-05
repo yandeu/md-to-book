@@ -13,6 +13,7 @@
     <script src="../../js/theme.js?v=1.3"></script>
     <script src="../../js/audio.js?v=1.2"></script>
     <script src="../../js/highlight.min.js?v=1.0"></script>
+    <script defer src="../../js/editable.js?v=1.0"></script>
   </head>
   <body>
     <div class="no-print" style="float: right">
@@ -21,7 +22,7 @@
       <button id="toggle-play"><img src="../../icons/mdi/play_circle.svg" /></button>
     </div>
 
-    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/f2f6f1a319d98f981c1476e12ff53575.8bd1b18c-4fe1-45e7-88f5-d27dc54f24f8.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/f2f6f1a319d98f981c1476e12ff53575.bd5a6e09-d1e1-4a1b-a610-1d43010b428a.mp3"><audio controls></audio></div><h1>A Example Book</h1>
+    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/093459156fd753336696d70347d81279.591f78a4-2bbb-49fe-a9b6-168221114714.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/093459156fd753336696d70347d81279.4179fa47-5cb8-4bc0-8695-a05e2905eefe.mp3"><audio controls></audio></div><h1>A Example Book</h1>
 <p>Some text.</p>
 <ul>
 <li>list</li>
@@ -34,6 +35,12 @@
 <li>list</li>
 </ul>
 <p>A paragraph with <code>code</code> in between.</p>
+<h2>Editable Codeblocks</h2>
+<p>The sql code below is editable.</p>
+<div class="editable">
+<pre><code class="language-sql">SELECT * FROM users;
+</code></pre>
+</div>
 <h2>Heading 2</h2>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <code>Lorem Ipsum</code> has been the industry's standard dummy text ever since the 1500s, when an unknown <code>printer</code> took a galley of type and scrambled it.</p>
 <h2>Another Header</h2>
