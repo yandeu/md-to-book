@@ -234,7 +234,8 @@ pre code.hljs {
   max-width: 600px;
   /* margin: 0 auto; */
 }
-.video-wrapper > video {
+.video-wrapper > video,
+.video-js {
   aspect-ratio: 16 / 9;
   width: 100%;
   height: auto;
