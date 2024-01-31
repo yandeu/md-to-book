@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../css/style.css?v=1.3" />
     <script src="../../js/theme.js?v=1.3"></script>
     <script src="../../js/audio.js?v=1.2"></script>
+    <script src="../../js/video.js?v=1.0"></script>
     <script src="../../js/highlight.min.js?v=1.0"></script>
     <script defer src="../../js/editable.js?v=1.0"></script>
   </head>
@@ -22,7 +23,7 @@
       <button id="toggle-play"><img src="../../icons/mdi/play_circle.svg" /></button>
     </div>
 
-    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/093459156fd753336696d70347d81279.591f78a4-2bbb-49fe-a9b6-168221114714.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/093459156fd753336696d70347d81279.4179fa47-5cb8-4bc0-8695-a05e2905eefe.mp3"><audio controls></audio></div><h1>A Example Book</h1>
+    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/e1b03f100560cb442be77980fcccf580.e810e718-5523-4ec3-bc8e-e136313596e9.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/e1b03f100560cb442be77980fcccf580.55c3b71e-bb9f-4fec-bfd3-16c8cfe413c5.mp3"><audio controls></audio></div><h1>A Example Book</h1>
 <p>Some text.</p>
 <ul>
 <li>list</li>
@@ -35,6 +36,13 @@
 <li>list</li>
 </ul>
 <p>A paragraph with <code>code</code> in between.</p>
+<h2>m3u8 streaming</h2>
+<p><em>See <a href="https://github.com/yandeu/video-to-m3u8">https://github.com/yandeu/video-to-m3u8</a> for more.</em></p>
+<div class="video-wrapper">
+  <video class="video-js" preload="auto" controls data-setup="{}">
+    <source src="https://yandeu.github.io/video-to-m3u8/out/playlist.m3u8" type="application/x-mpegURL">
+  </video>
+</div>
 <h2>Editable Codeblocks</h2>
 <p>The sql code below is editable.</p>
 <div class="editable">
