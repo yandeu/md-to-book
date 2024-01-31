@@ -26,19 +26,4 @@ const main = async () => {
   document.head.append(style)
 }
 
-window.addEventListener('DOMContentLoaded', () => setTimeout(() => main(), 500))
-
-// adding the styles immediately
-const style_inline = document.createElement('style')
-style_inline.innerHTML = /*css*/ `
-  .video-wrapper {
-    max-width: 600px;
-    /* margin: 0 auto; */
-  }
-  .video-js {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    height: auto;
-  }
-`
-document.head.append(style_inline)
+window.addEventListener('DOMContentLoaded', main)
