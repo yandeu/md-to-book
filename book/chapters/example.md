@@ -10,6 +10,16 @@ Some text.
 
 A paragraph with `code` in between.
 
+## m3u8 streaming
+
+_See https://github.com/yandeu/video-to-m3u8 for more._
+
+<div class="video-wrapper">
+  <video class="video-js" preload="auto" controls data-setup="{}">
+    <source src="https://yandeu.github.io/video-to-m3u8/out/playlist.m3u8" type="application/x-mpegURL" />
+  </video>
+</div>
+
 ## Editable Codeblocks
 
 The sql code below is editable.
