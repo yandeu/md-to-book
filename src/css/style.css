@@ -228,3 +228,14 @@ pre code.hljs {
     display: none !important;
   }
 }
+
+/** video-js video.js */
+.video-wrapper {
+  max-width: 600px;
+  /* margin: 0 auto; */
+}
+.video-js {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
