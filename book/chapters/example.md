@@ -15,7 +15,7 @@ A paragraph with `code` in between.
 _See https://github.com/yandeu/video-to-m3u8 for more._
 
 <div class="video-wrapper">
-  <video class="video-js" preload="none" poster="https://yandeu.github.io/video-to-m3u8/out/thumbnail.jpg" controls data-setup="{}">
+  <video preload="none" poster="https://yandeu.github.io/video-to-m3u8/out/thumbnail.jpg" controls>
     <source src="https://yandeu.github.io/video-to-m3u8/out/playlist.m3u8" type="application/x-mpegURL" />
   </video>
 </div>
