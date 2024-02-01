@@ -24,9 +24,10 @@ const main = async () => {
         const arr = /** @type {Array<HTMLSourceElement>} */ (Array.from(v.children))
         const m3u8 = arr.find(s => s.src.endsWith('m3u8'))
         if (!m3u8) return
-        var hls = new Hls()
+        const hls = new Hls({ autoStartLoad: false })
         hls.loadSource(m3u8.src)
         hls.attachMedia(v)
+        v.addEventListener('play', () => hls.startLoad(), console.log('asdf'), { once: true })
       })
     }
   })
