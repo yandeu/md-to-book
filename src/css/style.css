@@ -171,9 +171,16 @@ pre code.hljs {
   list-style: decimal !important;
 } */
 
+.heading-play-button {
+  margin-left: 8px;
+  width: 18px;
+  cursor: pointer;
+}
+
 /* audio bar */
 #audio-bar {
   display: none;
+  z-index: 1;
 }
 #audio-bar.is-active {
   display: unset;
