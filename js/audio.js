@@ -6,6 +6,8 @@
     if (!audioBar) return
     const audio = /** @type {HTMLAudioElement} */ (audioBar.firstChild)
     if (!audio) return
+    const exit = /** @type {HTMLSpanElement} */ (audioBar.lastChild)
+    if (!exit) return
 
     const audioUrl = audioBar.getAttribute('data-audio-url')
     const audioMarksUrl = audioBar.getAttribute('data-marks-url')
@@ -67,6 +69,7 @@
         play.src = '../../icons/mdi/play_circle.svg'
         heading.append(play)
         play.addEventListener('click', async () => {
+          audioBar.classList.add('is-active')
           const f = (await loadAudiMarks())[index]
           if (f) {
             await loadAudioFile()
@@ -81,6 +84,10 @@
 
     audio.addEventListener('play', () => {
       audioBar.classList.add('is-active')
+    })
+    exit.addEventListener('click', () => {
+      audio.pause()
+      audioBar.classList.remove('is-active')
     })
   }
   window.addEventListener('DOMContentLoaded', main)
