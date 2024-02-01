@@ -48,6 +48,10 @@
   & code.hljs {
     border-color: var(--theme-table-border);
   }
+
+  & .heading-play-button {
+    filter: invert(100%) sepia(0%) saturate(2284%) hue-rotate(215deg) brightness(112%) contrast(80%);
+  }
 }
 
 :root[data-theme='read'] {
@@ -60,6 +64,10 @@
   & code.hljs {
     background-color: var(--theme-background-elements);
   }
+
+  & .heading-play-button {
+    filter: invert(27%) sepia(21%) saturate(887%) hue-rotate(353deg) brightness(98%) contrast(86%);
+  }
 }
 
 :root[data-theme='contrast'] {
@@ -69,6 +77,10 @@
   --theme-hyperlink: #ff0;
   --theme-inline-code: #2f2f2f;
   --theme-table-border: #ffffff;
+
+  & .heading-play-button {
+    filter: invert(100%) sepia(0%) saturate(2284%) hue-rotate(215deg) brightness(112%) contrast(80%);
+  }
 }
 
 :root[data-font='literata'] {

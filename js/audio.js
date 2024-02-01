@@ -62,7 +62,11 @@
       )
 
       headings.forEach((heading, index) => {
-        heading.addEventListener('click', async () => {
+        const play = document.createElement('img')
+        play.classList.add('heading-play-button')
+        play.src = '../../icons/mdi/play_circle.svg'
+        heading.append(play)
+        play.addEventListener('click', async () => {
           const f = (await loadAudiMarks())[index]
           if (f) {
             await loadAudioFile()
