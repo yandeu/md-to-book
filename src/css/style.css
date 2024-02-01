@@ -181,9 +181,15 @@ pre code.hljs {
 #audio-bar {
   display: none;
   z-index: 1;
+  color: black;
+  gap: 8px;
+}
+#audio-bar span {
+  padding: 4px;
+  cursor: pointer;
 }
 #audio-bar.is-active {
-  display: unset;
+  display: flex;
   width: 100%;
   background: #e2e2e2;
   padding: 8px;
