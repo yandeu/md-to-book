@@ -21,7 +21,74 @@
       <button id="toggle-theme"><img src="../../icons/mdi/palette.svg" /></button>
       <button id="toggle-font"><img src="../../icons/mdi/custom_typography.svg" /></button>
       <button id="toggle-play"><img src="../../icons/mdi/play_circle.svg" /></button>
+      <button id="login-btn">login</button>
     </div>
+
+    <script type="module">
+      /**
+       * TEST MS SSO LOGIN
+       */
+      const main = async () => {
+        const THE_URL = 'https://yecfloyz3n4jwuk2p7asaiodi40kuolh.lambda-url.eu-central-1.on.aws/'
+        // const THE_URL = 'http://localhost:9000/'
+        const loginBtn = document.getElementById('login-btn')
+        if (loginBtn) {
+          loginBtn.addEventListener('click', () => {
+            location.href = THE_URL + 'login.html?redirect=' + location.href
+          })
+
+          // validate current jwt
+          const jwt = localStorage.getItem('jwt')
+          if (jwt) {
+            try {
+              const payload64 = jwt.split('.')[1]
+              const payloadPlain = atob(payload64)
+              const payload = JSON.parse(payloadPlain)
+              const exp = payload.exp
+              if (exp >= new Date().getTime() / 1000 + 86400) {
+                loginBtn.remove()
+              } else {
+                console.log('jwt expired')
+                localStorage.removeItem('jwt')
+              }
+            } catch (e) {
+              console.error(e.message)
+              console.log('jwt error')
+              localStorage.removeItem('jwt')
+            }
+          }
+
+          // check searchParams for uuid and get new jwt
+          const s = new URLSearchParams(location.search)
+          const uuid = s.get('uuid')
+          if (uuid) {
+            try {
+              const res = await fetch(THE_URL + 'api/auth/jwt/get', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'text/plain'
+                },
+                body: uuid
+              })
+              if (res.status !== 200) throw new Error()
+              const jwt = await res.text()
+              console.log('jwt', jwt)
+              console.log(res.status)
+              localStorage.setItem('jwt', jwt)
+            } catch (e) {
+              console.error(e.message)
+            } finally {
+              loginBtn?.remove()
+              const u = new URL(location.href)
+              u.searchParams.delete('uuid')
+              console.log(location.href)
+              location.href = u.href
+            }
+          }
+        }
+      }
+      main()
+    </script>
 
     <section>{{md}}</section>
 
