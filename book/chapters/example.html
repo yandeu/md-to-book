@@ -47,6 +47,16 @@
               const exp = payload.exp
               if (exp >= new Date().getTime() / 1000 + 86400) {
                 loginBtn.remove()
+                window.addEventListener('DOMContentLoaded', () => {
+                  const logoutBtn = document.createElement('button')
+                  logoutBtn.classList.add('no-print')
+                  logoutBtn.innerText = 'logout'
+                  logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('jwt')
+                    location.href = location.origin + location.pathname
+                  })
+                  document.querySelector('section')?.append(logoutBtn)
+                })
               } else {
                 console.log('jwt expired')
                 localStorage.removeItem('jwt')
