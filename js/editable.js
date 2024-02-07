@@ -1,3 +1,15 @@
+// https://stackoverflow.com/a/6234804
+const escapeHtml = unsafe => {
+  if (unsafe && typeof unsafe === 'string')
+    return unsafe
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;')
+  return unsafe
+}
+
 // @ts-check
 class ManageStorage {
   /**
@@ -45,15 +57,21 @@ class ManageStorage {
       const text = el.querySelector('.hljs')?.textContent
       if (typeof text !== 'string') return
 
-      el.innerHTML = `<textarea autocorrect="off" autocapitalize="off" spellcheck="false" rows="4" cols="50">${text}</textarea>`
+      el.innerHTML = `<div class="editable-text" contenteditable role="textbox" autocorrect="off" autocapitalize="off" spellcheck="false" rows="4" cols="50">${escapeHtml(
+        text
+      )}</div>`
       const textarea = /** @type {HTMLTextAreaElement | null} */ (el.firstChild)
       if (!textarea) return
+      setTimeout(() => {
+        textarea.focus()
+      })
 
       textarea?.addEventListener('blur', () => {
-        el.innerHTML = `<pre><code class="language-sql">${textarea.value}</code></pre>`
+        const value = escapeHtml(textarea.innerText)
+        el.innerHTML = `<pre><code class="language-sql">${value}</code></pre>`
 
         // save data
-        store.adjustData(index, textarea.value)
+        store.adjustData(index, value)
 
         const code = el.querySelector('code')
         if (typeof code === null) return
