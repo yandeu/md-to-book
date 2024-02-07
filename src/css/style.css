@@ -68,6 +68,18 @@ textarea {
   padding: 8.5px 17px;
 }
 
+.editable-text {
+  color: var(--theme-text);
+  background-color: var(--theme-background-elements);
+  border: 1px var(--theme-table-border) solid;
+  font-size: 17px;
+  width: 100%;
+  line-height: 1.5;
+  padding: 8.5px 17px;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
