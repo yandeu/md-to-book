@@ -7,4 +7,7 @@ export const json = {
       files: ["example"],
     },
   ],
+  config: {
+    storage: "remote",
+  },
 };

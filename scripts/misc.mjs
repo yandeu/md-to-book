@@ -10,6 +10,12 @@ export const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 export const today = () => dayjs().format('YYMMDD')
 
+export const appendToBodyTag = (str, html) => {
+  return html.replace(/(<body[^>]*)(>)/gm, (s, m1, m2) => {
+    return m1 + ' ' + str + m2
+  })
+}
+
 /**
  *
  * @param {string} from

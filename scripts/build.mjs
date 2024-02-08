@@ -4,18 +4,22 @@ import fs, { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { parseMarkdown } from '@yandeu/parse-markdown'
 import { getChapters } from './chapters.mjs'
-import { __dirname, copyAllFiles } from './misc.mjs'
+import { __dirname, appendToBodyTag, copyAllFiles } from './misc.mjs'
 import { addTimestampToImports } from './cache.mjs'
 
 export const build = async (cwd = process.cwd()) => {
   const book = await getChapters(cwd)
   const book_name = book.name
   const book_name_file = book_name.toLocaleLowerCase().replace(/\s+/gm, '-')
+  const book_storage = book.config?.storage || 'local'
 
   const BOOK_PATH = join(cwd, 'book')
   const DIST = join(cwd, 'dist')
   const SRC = join(__dirname, '../src')
-  const HTML_TEMPLATE = addTimestampToImports(await fs.readFile(join(SRC, 'template.html'), { encoding: 'utf-8' }))
+  let HTML_TEMPLATE = addTimestampToImports(await fs.readFile(join(SRC, 'template.html'), { encoding: 'utf-8' }))
+  if (book_storage === 'remote') {
+    HTML_TEMPLATE = appendToBodyTag('data-storage="remote"', HTML_TEMPLATE)
+  }
 
   // make dist dir
   await mkdir(DIST, { recursive: true })
@@ -65,14 +69,12 @@ export const build = async (cwd = process.cwd()) => {
 
         // [...] syntax experiment
         {
-          // data = data.replace(
-          //   /\[input=textarea\]/gm,
-          //   '<textarea autocorrect="off" autocapitalize="off" spellcheck="false" rows="4" cols="50"></textarea>'
-          // )
-          data = data.replace(
-            /\[editable=code\/sql\]/gm,
-            '<div class="editable">\n\n```sql\nSELECT * FROM users;\n```\n\n</div>'
-          )
+          data = data.replace(/\[editable=(code)\/(sql)\]/gm, (str, m1, m2) => {
+            if (m2 === 'sql') {
+              return '<div class="editable">\n\n```sql\nCODE\n```\n\n</div>'
+            }
+            return str
+          })
         }
 
         const md = await parseMarkdown(data) // Promise<{ markdown: string; yaml: {}; }>

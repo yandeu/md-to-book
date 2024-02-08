@@ -10,6 +10,9 @@ import { resolve, join } from 'path'
  *     directory: string;
  *     files: string[];
  *   }[];
+ *   config?: {
+ *     storage?: string
+ *   };
  * }} Book
  */
 
