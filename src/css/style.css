@@ -79,6 +79,28 @@ textarea {
   font-family: monospace;
   white-space: pre-wrap;
 }
+.editable code.success {
+  border: 1px solid;
+  animation: blink-border-green 0.5s;
+  animation-iteration-count: 1;
+}
+.editable code.failed {
+  border: 1px solid;
+  animation: blink-border-red 0.5s;
+  animation-iteration-count: 3;
+}
+@keyframes blink-border-green {
+  50% {
+    border-color: #008000;
+    background-color: #00800075;
+  }
+}
+@keyframes blink-border-red {
+  50% {
+    border-color: #ff0000;
+    background-color: #ff000075;
+  }
+}
 
 .table-wrapper {
   width: 100%;
