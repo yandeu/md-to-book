@@ -1,39 +1,36 @@
-// https://stackoverflow.com/a/6234804
-const escapeHtml = unsafe => {
-  if (unsafe && typeof unsafe === 'string')
-    return unsafe
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;')
-  return unsafe
-}
-
 // @ts-check
+
 class ManageStorage {
   /**
    * @param {string} path
+   * @param {"local" | "remote"} storageType
    */
-  constructor(path) {
+  constructor(path, storageType) {
     this.path = path
+    this.storageType = storageType
   }
 
   getDataByIndex(/** @type {number} */ index) {
     const data = this.getData()
-    if (data.length >= index) {
+    if (data?.length >= index) {
       return data[index]
     }
     return
   }
 
   getData() {
-    const storage = window.localStorage.getItem(this.path)
-    return typeof storage === 'string' ? JSON.parse(storage) : []
+    if (this.storageType === 'local') {
+      const storage = window.localStorage.getItem(this.path)
+      return typeof storage === 'string' ? JSON.parse(storage) : []
+    }
+
+    return []
   }
 
   setData(data) {
-    window.localStorage.setItem(this.path, JSON.stringify(data))
+    if (this.storageType === 'local') {
+      window.localStorage.setItem(this.path, JSON.stringify(data))
+    }
   }
 
   adjustData(index, newData) {
@@ -46,7 +43,9 @@ class ManageStorage {
 {
   const editable = /** @type {NodeListOf<HTMLDivElement>} */ (document.querySelectorAll('.editable'))
   const path = window.location.pathname
-  const store = new ManageStorage(path)
+  const storageType = document.body.getAttribute('data-storage') || 'local'
+  // @ts-expect-error
+  const store = new ManageStorage(path, storageType)
 
   for (const [index, el] of editable.entries()) {
     // adjust data from storage
@@ -80,4 +79,16 @@ class ManageStorage {
       })
     })
   }
+}
+
+// https://stackoverflow.com/a/6234804
+const escapeHtml = unsafe => {
+  if (unsafe && typeof unsafe === 'string')
+    return unsafe
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;')
+  return unsafe
 }
