@@ -187,10 +187,12 @@ pre > code {
   line-height: 1.5;
 }
 
-pre code.hljs {
+pre code.hljs,
+pre code[class^='language'] {
   font-size: 17px;
   padding: 0.5em 1em;
   border: 1px #e2e2e2 solid;
+  display: block;
 }
 
 /* span.hljs-comment {
