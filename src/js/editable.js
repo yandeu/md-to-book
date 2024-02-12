@@ -92,7 +92,12 @@ class ManageStorage {
     for (const [index, el] of editable.entries()) {
       // adjust data from storage
       const d = await store.getDataByIndex(index)
-      if (d) el.innerHTML = `<pre><code class="language-sql">${d}</code></pre>`
+      const c = el.querySelector('code')
+      if (d && c) c.innerHTML = d
+      if (c) {
+        // @ts-expect-error
+        hljs?.highlightElement(c)
+      }
 
       el?.addEventListener('click', () => {
         const text = el.querySelector('.hljs')?.textContent
@@ -123,7 +128,9 @@ class ManageStorage {
       })
     }
   }
-  main()
+  window.addEventListener('DOMContentLoaded', () => {
+    main()
+  })
 }
 
 // https://stackoverflow.com/a/6234804
