@@ -1,5 +1,7 @@
 // @ts-check
 
+/// <reference path="./types.d.ts" />
+
 /**
  *
  * @returns {Promise<boolean>}
@@ -16,34 +18,62 @@ class ManageStorage {
     this.storageType = storageType
   }
 
-  async getDataByIndex(/** @type {number} */ index) {
+  /**
+   *
+   * @param {number} index
+   * @returns {Promise<string | null>}
+   */
+  async getDataByIndex(index) {
     const data = await this.getData()
     if (data?.length >= index) {
       return data[index]
     }
-    return
+    return null
   }
 
+  /**
+   *
+   * @returns {Promise<Array<string>>}
+   */
   async getData() {
     if (this.storageType === 'local') {
       const storage = window.localStorage.getItem(this.path)
       return typeof storage === 'string' ? JSON.parse(storage) : []
     } else if (this.storageType === 'remote') {
-      await simulateRemoteDelay()
+      if (window.get_remote_data && typeof window.get_remote_data === 'function') {
+        return (await window.get_remote_data()) || []
+      } else {
+        return []
+      }
     }
     return []
   }
 
+  /**
+   *
+   * @param {any} data
+   * @returns {Promise<boolean>}
+   */
   async setData(data) {
     if (this.storageType === 'local') {
       window.localStorage.setItem(this.path, JSON.stringify(data))
       return true
     } else if (this.storageType === 'remote') {
-      return await simulateRemoteDelay()
+      if (window.store_remote_data && typeof window.store_remote_data === 'function') {
+        return await window.store_remote_data(JSON.stringify(data))
+      } else {
+        return false
+      }
     }
     return true
   }
 
+  /**
+   *
+   * @param {number} index
+   * @param {string} newData
+   * @returns {Promise<boolean>}
+   */
   async adjustData(index, newData) {
     const data = await this.getData()
     data[index] = newData

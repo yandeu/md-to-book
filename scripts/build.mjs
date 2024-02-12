@@ -20,6 +20,8 @@ export const build = async (cwd = process.cwd()) => {
   if (book_storage === 'remote') {
     HTML_TEMPLATE = appendToBodyTag('data-storage="remote"', HTML_TEMPLATE)
   }
+  // addCustomHeaders
+  HTML_TEMPLATE = HTML_TEMPLATE.replace('{{CUSTOM_HEADER}}', book.config?.customHeader || '')
 
   // make dist dir
   await mkdir(DIST, { recursive: true })
@@ -164,6 +166,6 @@ export const build = async (cwd = process.cwd()) => {
   }
 
   // copy all files
-  await copyAllFiles(BOOK_PATH, join(DIST, 'book'), /\/\.|\.js$|\.mjs$|\.md$/)
+  await copyAllFiles(BOOK_PATH, join(DIST, 'book'), /\/\.|\.mjs$|\.md$/)
   console.log('done')
 }

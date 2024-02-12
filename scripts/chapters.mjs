@@ -1,6 +1,6 @@
 // @ts-check
 
-import { resolve, join } from 'path'
+import { join } from 'path'
 
 /**
  * @typedef {{
@@ -11,7 +11,8 @@ import { resolve, join } from 'path'
  *     files: string[];
  *   }[];
  *   config?: {
- *     storage?: string
+ *     storage?: string;
+ *     customHeader?: string;
  *   };
  * }} Book
  */

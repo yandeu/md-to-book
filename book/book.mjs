@@ -9,5 +9,6 @@ export const json = {
   ],
   config: {
     storage: "remote",
+    customHeader: '<script src="../test.js"></script>',
   },
 };
