@@ -94,6 +94,10 @@ class ManageStorage {
       const d = await store.getDataByIndex(index)
       const c = el.querySelector('code')
       if (d && c) c.innerHTML = d
+      if (c) {
+        // @ts-expect-error
+        hljs?.highlightElement(c)
+      }
 
       el?.addEventListener('click', () => {
         const text = el.querySelector('.hljs')?.textContent
