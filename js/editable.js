@@ -100,7 +100,7 @@ class ManageStorage {
       }
 
       el?.addEventListener('click', () => {
-        const text = el.querySelector('.hljs')?.textContent
+        const text = el.querySelector('[class^="language-"]')?.textContent
         if (typeof text !== 'string') return
 
         el.innerHTML = `<div class="editable-text" contenteditable role="textbox" autocorrect="off" autocapitalize="off" spellcheck="false" rows="4" cols="50">${escapeHtml(
