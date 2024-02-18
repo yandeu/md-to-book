@@ -35,6 +35,11 @@ jobs:
       - name: Build PDF
         run: npm run to-pdf
 
+      - name: CSS Transform
+        run: |
+          chmod +x ./bin/css-transform
+          ./bin/css-transform dist/css/style.css dist/css/style.css
+
       - name: Disable jekyll
         run: touch dist/.nojekyll
 
