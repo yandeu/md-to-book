@@ -81,16 +81,19 @@ textarea {
   font-family: monospace;
   white-space: pre-wrap;
 }
-.editable code.success {
-  border: 1px solid;
-  animation: blink-border-green 0.5s;
-  animation-iteration-count: 1;
+.editable {
+  & code.success {
+    border: 1px solid;
+    animation: blink-border-green 0.5s;
+    animation-iteration-count: 1;
+  }
+  & code.failed {
+    border: 1px solid;
+    animation: blink-border-red 0.5s;
+    animation-iteration-count: 3;
+  }
 }
-.editable code.failed {
-  border: 1px solid;
-  animation: blink-border-red 0.5s;
-  animation-iteration-count: 3;
-}
+
 @keyframes blink-border-green {
   50% {
     border-color: #008000;
@@ -116,60 +119,63 @@ table {
   border-spacing: 0;
   text-indent: 0;
   text-align: left;
-}
-table thead tr {
-  border-bottom: 1px var(--theme-table-border) solid;
-}
-table tbody tr:not(:last-child) {
-  border-bottom: 1px var(--theme-table-border) solid;
-}
-table th,
-table td {
-  padding: 8px;
-}
-table th {
-  font-weight: bold;
+
+  & thead {
+    & tr {
+      border-bottom: 1px var(--theme-table-border) solid;
+    }
+  }
+
+  & tbody {
+    & tr {
+      &:not(:last-child) {
+        border-bottom: 1px var(--theme-table-border) solid;
+      }
+    }
+  }
+
+  & th {
+    font-weight: bold;
+    padding: 8px;
+  }
+
+  & td {
+    padding: 8px;
+  }
 }
 
 .chapters-list {
   padding-inline-start: 0px;
-}
 
-.chapters-list ol {
-  margin: 0;
-  padding: 0;
-  border-left: 1px gray solid;
-  padding-inline-start: 0px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  list-style-type: decimal;
-  list-style-position: inside;
-  line-height: 1.5;
-}
-.chapters-list > li {
-  list-style-type: none;
-}
-.chapters-list li {
-  margin-left: 12px;
-}
-.chapters-list > li {
-  margin-left: 0px;
+  & ol {
+    margin: 0;
+    padding: 0;
+    border-left: 1px gray solid;
+    padding-inline-start: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    list-style-type: decimal;
+    list-style-position: inside;
+    line-height: 1.5;
+  }
+
+  & li {
+    margin-left: 12px;
+  }
+
+  & > li {
+    list-style-type: none;
+    margin-left: 0px;
+  }
 }
 
 hr {
-  /* display: none; */
   border-color: transparent;
 }
-
-/* old */
 
 blockquote {
   border-color: #dcdcdc;
 }
-
-/* .language-sql .hljs-number {
-  color: green;
-} */
 
 img {
   max-width: 100%;
@@ -185,29 +191,19 @@ code {
   font-size: 85%;
 }
 
-pre > code {
-  line-height: 1.5;
+pre {
+  & > code {
+    line-height: 1.5;
+  }
+
+  & code.hljs,
+  code[class^='language'] {
+    font-size: 17px;
+    padding: 0.5em 1em;
+    border: 1px #e2e2e2 solid;
+    display: block;
+  }
 }
-
-pre code.hljs,
-pre code[class^='language'] {
-  font-size: 17px;
-  padding: 0.5em 1em;
-  border: 1px #e2e2e2 solid;
-  display: block;
-}
-
-/* span.hljs-comment {
-  color: #959595;
-} */
-
-/* td.font-size-16 {
-  font-size: 16px !important;
-} */
-
-/* ol li {
-  list-style: decimal !important;
-} */
 
 .heading-play-button {
   margin-left: 8px;
@@ -221,24 +217,27 @@ pre code[class^='language'] {
   z-index: 1;
   color: black;
   gap: 8px;
-}
-#audio-bar span {
-  padding: 4px;
-  cursor: pointer;
-}
-#audio-bar.is-active {
-  display: flex;
-  width: 100%;
-  background: #e2e2e2;
-  padding: 8px;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-}
-#audio-bar.is-active audio {
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
+
+  & span {
+    padding: 4px;
+    cursor: pointer;
+  }
+
+  &.is-active {
+    display: flex;
+    width: 100%;
+    background: #e2e2e2;
+    padding: 8px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+
+    & audio {
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
 }
 
 /* print */
@@ -283,7 +282,6 @@ pre code[class^='language'] {
 /** video-js video.js */
 .video-wrapper {
   max-width: 600px;
-  /* margin: 0 auto; */
 }
 .video-wrapper > video,
 .video-js {
