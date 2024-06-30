@@ -1,0 +1,292 @@
+#html-editor-root {
+  --color-white: #fff;
+  --background-color: #f5f5f5;
+  --border-color: #ddd;
+  --border-properties: 1px solid #ddd;
+  --button-color: #f8f8f8;
+  background-color: var(--color-white);
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+}
+
+#html-editor-root .cm-focused {
+  outline: none !important;
+}
+
+#html-editor-root .cm-content {
+  outline: none !important;
+}
+
+#html-editor-root .ͼm {
+  color: silver;
+}
+
+#html-editor-root footer {
+  border: var(--border-properties);
+  background: var(--background-color);
+  flex-flow: wrap-reverse;
+  justify-content: space-between;
+  padding-right: 12px;
+  font-size: 11px;
+  display: flex;
+}
+
+#html-editor-root footer p {
+  padding: 3px 8px;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+#html-editor-root footer span {
+  cursor: pointer;
+  padding: 3px 8px;
+  line-height: 1;
+  display: inline-block;
+}
+
+#html-editor-root footer select {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  height: 17px;
+  font-size: 11px;
+}
+
+#html-editor-root footer select option {
+  background: #fff;
+}
+
+#html-editor-root footer > div:last-child > :hover {
+  background-color: #d3d3d3;
+}
+
+#html-editor-root #main {
+  flex-direction: row;
+  flex: auto;
+  display: flex;
+  overflow: auto;
+}
+
+#html-editor-root #main > div {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+#html-editor-root #main > div:nth-child(2) {
+  border-left: var(--border-properties);
+  border-right: var(--border-properties);
+  background: var(--background-color);
+  cursor: col-resize;
+  flex: 0 0 10px;
+}
+
+#html-editor-root .preview {
+  overflow: hidden auto !important;
+}
+
+#html-editor-root .preview-sql {
+  overflow-x: auto !important;
+}
+
+#html-editor-root .preview-sql table {
+  text-wrap: nowrap;
+  border-collapse: collapse;
+}
+
+#html-editor-root .preview-sql table td {
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+}
+
+#html-editor-root .preview-sql table th {
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+}
+
+#html-editor-root .preview-sql table th {
+  background-color: #f4f4f4;
+}
+
+#html-editor-root header {
+  background: var(--background-color);
+  border-bottom: var(--border-properties);
+  justify-content: space-between;
+  padding: 4px;
+  display: flex;
+}
+
+#html-editor-root header button {
+  background: var(--button-color);
+  border: var(--border-properties);
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 2px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+#html-editor-root header button.btn-icon img {
+  max-height: 10px;
+}
+
+#html-editor-root header div:nth-child(2) {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+#html-editor-root header div:nth-child(2) span:first-child {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#html-editor-root #tabs {
+  background: var(--background-color);
+  border-bottom: var(--border-properties);
+  justify-content: space-evenly;
+  gap: 8px;
+  padding: 0 8px;
+  display: flex;
+}
+
+#html-editor-root .tab {
+  cursor: pointer;
+  z-index: 1;
+  border-left: var(--border-properties);
+  border-right: var(--border-properties);
+  border-color: var(--background-color);
+  border-bottom: 4px solid var(--background-color);
+  flex-grow: 1;
+  align-items: center;
+  height: 30px;
+  font-size: 14px;
+  display: flex;
+}
+
+#html-editor-root .tab:hover {
+  background: #efefef;
+  border-bottom: 4px solid #dbdbdb;
+}
+
+#html-editor-root .tab.active {
+  border-left: var(--border-properties);
+  border-right: var(--border-properties);
+  background-color: #ededed;
+  border-bottom: 4px solid #3584e4;
+  margin-bottom: -1px;
+}
+
+#html-editor-root .tab div:first-child {
+  text-align: center;
+  width: 100%;
+}
+
+#html-editor-root .tab div:last-child {
+  background: none;
+  border: 1px solid #0000;
+  border-radius: 2px;
+  margin-right: 4px;
+  padding: 1px 5px;
+}
+
+#html-editor-root .tab div:last-child:hover {
+  background: var(--button-color);
+  border: var(--border-properties);
+}
+
+#html-editor-root .is-hidden {
+  display: none !important;
+}
+
+#html-editor-root div#editors {
+  height: 100%;
+  font-size: 14px;
+}
+
+#html-editor-root .editor {
+  display: none;
+}
+
+#html-editor-root .editor.active {
+  display: unset;
+  height: 100%;
+  display: flex;
+}
+
+#html-editor-root .divider {
+  border-left: var(--border-properties);
+  border-right: var(--border-properties);
+  background: var(--background-color);
+  cursor: col-resize;
+  flex: 0 0 10px !important;
+}
+
+#html-editor-root .divider img {
+  max-width: 10px;
+  margin-top: 2px;
+}
+
+@media only screen and (max-width: 600px) {
+  #html-editor-root .divider {
+    flex: 0 0 16px !important;
+  }
+
+  #html-editor-root .divider img {
+    max-width: 16px;
+    margin-top: 4px;
+  }
+}
+
+#html-editor-root .editor.active > div {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+#html-editor-root iframe {
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  height: 100%;
+  margin-bottom: -4px;
+}
+
+#html-editor-root .console {
+  color: #383838;
+  box-sizing: border-box;
+  background: #ededed;
+  padding: 4px;
+  overflow: auto;
+}
+
+#html-editor-root .console-is-visible > iframe {
+  height: 85%;
+}
+
+#html-editor-root .console-is-visible > .console {
+  height: 15%;
+}
+
+#html-editor-root .cm-editor {
+  height: 100%;
+  font-size: 16px;
+}
+
+#html-editor-root .cm-line {
+  padding-right: 16px;
+}
+
+#html-editor-root ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+}
+
+#html-editor-root ::-webkit-scrollbar-thumb {
+  background-color: #00000080;
+  border-radius: 4px;
+  box-shadow: 0 0 1px #ffffff80;
+}
