@@ -16,8 +16,20 @@
   height: 100%;
   backdrop-filter: blur(1px);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
   ">
+    <!-- close btn -->
+    <div id="backdrop-close-btn" style="position: fixed;
+      top: 0px;
+      right: 13px;
+      line-height: 1;
+      font-size: 32px;
+      width: 32px;
+      background: red;
+      text-align: center;
+      height: 38px;
+      cursor: pointer;
+      border-radius: 0px 0px 4px 4px;">x</div>
     <!-- container -->
     <div style="background-color: white;
       position: absolute;
@@ -26,7 +38,9 @@
       width: 90%;
       height: 90%;
       top: calc(50dvh - 250px);
-      max-height: 500px;">
+      max-height: 500px;
+      border-radius: 4px;
+      overflow: hidden;">
         <!-- html-editor -->
         <style>
           #html-editor-root {
@@ -34,6 +48,9 @@
           }
           #html-editor-root #main {
             margin-bottom: 0px;
+          }
+          #html-editor {
+            height: 100%;
           }
         </style>
         <div id="html-editor"></div>
@@ -52,21 +69,33 @@ console.log(hello);
   document.head.append(styles)
 
   import { init } from '../../lib/html-editor/html-editor.js'
-  await init('html-editor', {
-    footer: false,
-    header: true,
+  const doc = await(await fetch("http://localhost:8080/dist/book/test.js")).text()
+  /* await init('html-editor', {
+    footer: true,
+    header: {newTab:false, openBtn:false, fullscreen:true, run:true, saveBtn:true},
     tabs: [
       {
         doc: `let hello = "JavaScript";\nconsole.log(hello);\n`,
         lang: 'javascript',
         fileName: 'demo'
       }
-    ]
-  })
+    ],
+    events: {onSave: ()=>{
+      return true
+    }}
+  }) */
 
   setTimeout(() => {
+    return
     const backdrop = document.getElementById('backdrop')
-    // backdrop.addEventListener('click', () => backdrop.remove())
+    const backdropCloseBtn = document.getElementById('backdrop-close-btn')
+    backdropCloseBtn.addEventListener('click', () => {
+      backdrop.classList.remove("full-opacity");
+      setTimeout(()=>{
+        document.body.style.overflow = "unset";
+        backdrop.remove()
+      }, 300)
+    })
     backdrop.classList.add("full-opacity")
     document.body.style.overflow = "hidden"
 

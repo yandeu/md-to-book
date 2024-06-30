@@ -1,10 +1,12 @@
 #html-editor-root {
   --color-white: #fff;
+  --color-black: #000;
   --background-color: #f5f5f5;
   --border-color: #ddd;
   --border-properties: 1px solid #ddd;
   --button-color: #f8f8f8;
   background-color: var(--color-white);
+  color: var(--color-black);
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
