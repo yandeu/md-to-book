@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+.hljs.language-js {
+  position: relative;
+
+  .edit-button {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 2px;
+  }
+}
+
 body {
   font-family: var(--theme-font-family);
   background-color: var(--theme-background);

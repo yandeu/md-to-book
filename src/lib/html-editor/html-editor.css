@@ -224,6 +224,7 @@
   border-right: var(--border-properties);
   background: var(--background-color);
   cursor: col-resize;
+  overflow: hidden;
   flex: 0 0 10px !important;
 }
 
