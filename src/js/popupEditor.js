@@ -16,6 +16,7 @@ var popup_editor_template = /* html */ `<!-- backdrop -->
   ">
     <!-- close btn -->
     <div id="backdrop-close-btn" style="position: fixed;
+      color: white;
       top: 0px;
       right: 13px;
       line-height: 1;

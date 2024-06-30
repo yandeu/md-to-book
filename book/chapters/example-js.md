@@ -10,9 +10,6 @@ console.log(hello);
 <script type="module">
   import { init, destroyAllTabs} from '../../lib/html-editor/html-editor.js'
 
-
-
-
   // add styles
   const styles = document.createElement("link")
   styles.href = "../../lib/html-editor/html-editor.css"
@@ -21,10 +18,10 @@ console.log(hello);
 
   // init editor
   const add = async () => {
-    const doc = await(await fetch("http://localhost:8080/dist/book/test.js")).text()
-    let views = await init('html-editor', {
+    const doc = await(await fetch("/dist/book/test.js")).text()
+    await init('html-editor', {
       footer: true,
-      // header: {newTab:false, openBtn:false, fullscreen:true, run:true, saveBtn:true},
+      header: {newTab:true, openBtn:false, fullscreen:true, run:true, saveBtn:true},
       tabs: [
         {
           doc: `let hello = "JavaScript";\nconsole.log(hello);\n`,
@@ -33,11 +30,10 @@ console.log(hello);
         }
       ],
       events: {onSave: ()=>{
+        console.log("intercept save")
         return true
       }}
     })
-    console.log(views)
-    return views
   }
 
 
@@ -50,7 +46,7 @@ console.log(hello);
       a.append(span)
       span.addEventListener("click",async()=>{
           add_popup_editor_template()
-          const views = await add()
+          await add()
           const backdrop = document.getElementById('backdrop')
           const backdropCloseBtn = document.getElementById('backdrop-close-btn')
           backdropCloseBtn.addEventListener('click', () => {
@@ -79,11 +75,6 @@ console.log(hello);
             })
             .join('')
 
-          jsBlocks.forEach(a => {
-            a.addEventListener('click', () => {
-              console.log('click me')
-            })
-          })
         }, 500)
       })
     })
