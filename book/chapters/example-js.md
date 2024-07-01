@@ -1,14 +1,25 @@
 # JavaScript Code Example
 
-[editable=code/js]
+A simple js snippet
+
+```js
+let x = 5;
+x += 7;
+
+expect(x).toBe(12);
+```
+
+Another snippet
 
 ```js
 let hello = "JavaScript";
-console.log(hello);
+editor.log(hello);
 ```
 
+Lade Aufgabe von url <a data-action="html-editor" data-url="http://localhost:8080/dist/book/test.js" >(test.js)</a>.
+
 <script type="module">
-  import { init, destroyAllTabs} from '../../lib/html-editor/html-editor.js'
+  import { init, openPreview, destroyAllTabs} from '../../lib/html-editor/html-editor.js'
 
   // add styles
   const styles = document.createElement("link")
@@ -17,14 +28,17 @@ console.log(hello);
   document.head.append(styles)
 
   // init editor
-  const add = async () => {
-    const doc = await(await fetch("/dist/book/test.js")).text()
+  const add = async (doc) => {
+    if(doc.startsWith("data-url:")) {
+      doc = doc.slice(9)
+      doc = await(await fetch(doc)).text()
+    }
     await init('html-editor', {
       footer: true,
       header: {newTab:true, openBtn:false, fullscreen:true, run:true, saveBtn:true},
       tabs: [
         {
-          doc: `let hello = "JavaScript";\nconsole.log(hello);\n`,
+          doc: doc,
           lang: 'javascript',
           fileName: 'demo'
         }
@@ -34,19 +48,51 @@ console.log(hello);
         return true
       }}
     })
+    setTimeout(()=>{
+      openPreview()
+    })
   }
 
 
   setTimeout(() => {
-    const jsLangs = document.querySelectorAll(".hljs.language-js")
-    jsLangs.forEach(a=>{
-      const span = document.createElement("span")
-      span.innerText = "edit"
-      span.classList.add("edit-button")
-      a.append(span)
-      span.addEventListener("click",async()=>{
+    let  jsLangElements = []
+    const hljs = Array.from(document.querySelectorAll(".hljs.language-js"))
+    const docFromLink = Array.from(document.querySelectorAll('[data-action="html-editor"]'))
+    jsLangElements = [...hljs,...docFromLink]
+
+    jsLangElements.forEach(a=>{
+      const hasActionAttribute = a.hasAttribute("data-action")
+      console.log(hasActionAttribute)
+      // const doc = await(await fetch("/dist/book/test.js")).text()
+      let clickElement
+      if(!hasActionAttribute) {
+        const span = document.createElement("span")
+        span.innerText = "edit"
+        span.classList.add("edit-button")
+        a.append(span)
+        clickElement = span
+      } else {
+        clickElement = a
+      }
+      clickElement.addEventListener("click",async()=>{
+          // get text from .language-javascript
+          const nodes = Array.from(a.childNodes)
+          const code = !hasActionAttribute ?
+            nodes.filter((a,i)=>{
+              // remove the "edit" button (edit should be last node)
+              if(i === nodes.length -1 && a.classList?.contains("edit-button")) return false
+              return true
+            }).map(a => {
+              if (a.nodeType == Node.TEXT_NODE) {
+                return a.nodeValue
+              } else {
+                return a.innerText
+              }
+            })
+            .join('') : "data-url:"+a.getAttribute("data-url")
+          console.log(code)
           add_popup_editor_template()
-          await add()
+          await add(code)
           const backdrop = document.getElementById('backdrop')
           const backdropCloseBtn = document.getElementById('backdrop-close-btn')
           backdropCloseBtn.addEventListener('click', () => {
@@ -61,20 +107,7 @@ console.log(hello);
             backdrop.classList.add("full-opacity")
           })
           document.body.style.overflow = "hidden"
-
           const jsBlocks = document.querySelectorAll('.language-javascript')
-
-          // get text from .language-javascript
-          let code = Array.from(jsBlocks[0].childNodes)
-            .map(a => {
-              if (a.nodeType == Node.TEXT_NODE) {
-                return a.nodeValue
-              } else {
-                return a.innerText
-              }
-            })
-            .join('')
-
         }, 500)
       })
     })

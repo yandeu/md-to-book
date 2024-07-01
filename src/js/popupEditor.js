@@ -15,6 +15,14 @@ var popup_editor_template = /* html */ `<!-- backdrop -->
   transition: opacity 0.3s;
   ">
     <!-- close btn -->
+    <div id="backdrop-close-btn-corner" style="position: fixed;
+      top: 0px;
+      right: 45px;
+      width: 20px;
+      background: #ffffff00;
+      height: 5px;
+      box-shadow: 12px 0 0 0 #ff0000;
+      border-radius: 0px 5px 0px 0px;"></div>
     <div id="backdrop-close-btn" style="position: fixed;
       color: white;
       top: 0px;
@@ -26,7 +34,8 @@ var popup_editor_template = /* html */ `<!-- backdrop -->
       text-align: center;
       height: 38px;
       cursor: pointer;
-      border-radius: 0px 0px 4px 4px;">x</div>
+      border-radius: 0px 4px 4px 4px;
+      box-shadow: 2px 2px 2px 1px #0000004f;">x</div>
     <!-- container -->
     <div style="background-color: white;
       position: absolute;
