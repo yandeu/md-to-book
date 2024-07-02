@@ -15,6 +15,12 @@ body {
   line-height: 1.6;
 }
 
+footer {
+  font-size: 11px;
+  opacity: 0.8;
+  line-height: 1.2;
+}
+
 section {
   margin-bottom: 3em;
 }

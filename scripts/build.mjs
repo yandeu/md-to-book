@@ -6,6 +6,7 @@ import { parseMarkdown } from '@yandeu/parse-markdown'
 import { getChapters } from './chapters.mjs'
 import { __dirname, appendToBodyTag, copyAllFiles } from './misc.mjs'
 import { addTimestampToImports } from './cache.mjs'
+import { extract } from './licenseScanner.mjs'
 
 export const build = async (cwd = process.cwd()) => {
   const book = await getChapters(cwd)
@@ -168,4 +169,7 @@ export const build = async (cwd = process.cwd()) => {
   // copy all files
   await copyAllFiles(BOOK_PATH, join(DIST, 'book'), /\/\.|\.mjs$|\.md$/)
   console.log('done')
+
+  // extract all licenses
+  await extract()
 }

@@ -13,18 +13,32 @@
       }
     </style>
   </head>
-  <body>
-    <div id="top-buttons" class="no-print" style="float: right">
-      <button id="toggle-theme"><img src="./icons/mdi/palette.svg" /></button>
-      <button id="toggle-font"><img src="./icons/mdi/custom_typography.svg" /></button>
-    </div>
+  <body style="height: 100vh; height: 100dvh">
+    <div style="display: flex; justify-content: space-between; flex-direction: column; height: 100%">
+      <div>
+        <div id="top-buttons" class="no-print" style="float: right">
+          <button id="toggle-theme"><img src="./icons/mdi/palette.svg" /></button>
+          <button id="toggle-font"><img src="./icons/mdi/custom_typography.svg" /></button>
+        </div>
 
-    <h1>{{BOOK_NAME}}</h1>
-    <h2>Chapters</h2>
-    <ul class="chapters-list">
-      {{CHAPTERS}}
-    </ul>
-    <h2>PDF</h2>
-    <p><a href="./book/{{BOOK_NAME_FILE}}.pdf">Download PDF</a></p>
+        <h1>{{BOOK_NAME}}</h1>
+        <h2>Chapters</h2>
+        <ul class="chapters-list">
+          {{CHAPTERS}}
+        </ul>
+        <h2>PDF</h2>
+        <p><a href="./book/{{BOOK_NAME_FILE}}.pdf">Download PDF</a></p>
+      </div>
+      <div>
+        <footer>
+          Except where otherwise <a href="./LICENSE-3RD-PARTY.txt" target="_blank">noted</a>, the content in this
+          documentation is licensed under a
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer"
+            >Commons Attribution-NonCommercial-ShareAlike 4.0 International</a
+          >
+          license.
+        </footer>
+      </div>
+    </div>
   </body>
 </html>
