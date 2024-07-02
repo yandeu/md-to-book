@@ -110,6 +110,12 @@ body {
   line-height: 1.6;
 }
 
+footer {
+  opacity: .8;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
 section {
   margin-bottom: 3em;
 }
