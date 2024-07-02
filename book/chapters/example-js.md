@@ -35,7 +35,7 @@ Lade Aufgabe von url <a data-action="html-editor" data-url="http://localhost:808
     }
     await init('html-editor', {
       footer: true,
-      header: {newTab:true, openBtn:false, fullscreen:true, run:true, saveBtn:true},
+      header: {loadBtn: true, newTab:false, openBtn:false, fullscreen:true, run:true, saveBtn:true},
       tabs: [
         {
           doc: doc,
@@ -43,10 +43,15 @@ Lade Aufgabe von url <a data-action="html-editor" data-url="http://localhost:808
           fileName: 'demo'
         }
       ],
-      events: {onSave: ()=>{
-        console.log("intercept save")
-        return true
-      }}
+      events: {
+        onSave: ()=>{
+          console.log("intercept save")
+          return true
+        },
+        onLoad: ()=>{
+          console.log("onLoad event")
+        }
+      }
     })
     setTimeout(()=>{
       openPreview()
@@ -68,6 +73,7 @@ Lade Aufgabe von url <a data-action="html-editor" data-url="http://localhost:808
       if(!hasActionAttribute) {
         const span = document.createElement("span")
         span.innerText = "edit"
+        span.innerHTML = '<img style="filter: var(--theme-svg-text-filter);opacity: 0.5;" src="../../icons/mdi/javascript.svg" />'
         span.classList.add("edit-button")
         a.append(span)
         clickElement = span
