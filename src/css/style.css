@@ -63,6 +63,7 @@ small {
 a {
   text-decoration: none;
   color: var(--theme-hyperlink);
+  cursor: pointer;
 }
 
 input,
@@ -195,6 +196,17 @@ code {
   border-radius: 3px;
   padding: 0.1em 0.2em;
   font-size: 85%;
+}
+
+.hljs.language-js {
+  position: relative;
+
+  .edit-button {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 2px;
+  }
 }
 
 pre {

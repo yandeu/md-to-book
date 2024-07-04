@@ -4,7 +4,7 @@ export const json = {
     {
       title: "Chapters",
       directory: "chapters",
-      files: ["example"],
+      files: ["example", "example-js"],
     },
   ],
   config: {
