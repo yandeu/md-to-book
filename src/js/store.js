@@ -45,8 +45,6 @@ export class ManageStorage {
   async setDataByIndex(index, text) {
     const currData = await this.getData()
     const newData = set(currData, index, text)
-
-    console.log('new data', index, text, newData)
     this.setData(newData)
   }
 
