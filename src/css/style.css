@@ -198,17 +198,6 @@ code {
   font-size: 85%;
 }
 
-.hljs.language-js {
-  position: relative;
-
-  .edit-button {
-    cursor: pointer;
-    position: absolute;
-    top: 0px;
-    right: 2px;
-  }
-}
-
 pre {
   & > code {
     line-height: 1.5;
