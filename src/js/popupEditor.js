@@ -139,7 +139,9 @@ setTimeout(() => {
             },
             onLoad: async () => {
               const text = await store.getDataByIndex(index)
-              setActiveTabText(text)
+              if (text && text.length > 0) {
+                setActiveTabText(text)
+              }
               return true
             }
           }
