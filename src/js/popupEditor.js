@@ -135,6 +135,7 @@ setTimeout(() => {
             },
             onLoad: () => {
               console.log('onLoad event')
+              return true
             }
           }
         })
@@ -169,7 +170,6 @@ setTimeout(() => {
         clickElement.addEventListener('click', async () => {
           // get text from .language-javascript
           const nodes = Array.from(a.childNodes)
-          console.log(nodes)
           const code = !hasActionAttribute
             ? nodes
                 .filter((a, i) => {
@@ -187,7 +187,6 @@ setTimeout(() => {
                 .join('')
             : 'data-url:' + a.getAttribute('data-url')
           add_popup_editor_template()
-          console.log('ass')
           await add(code)
           const backdrop = document.getElementById('backdrop')
           const backdropCloseBtn = document.getElementById('backdrop-close-btn')
