@@ -6,10 +6,7 @@ import { escapeHtml } from './misc.esm.js'
 import { ManageStorage } from './store.js'
 
 const editable = /** @type {NodeListOf<HTMLDivElement>} */ (document.querySelectorAll('.editable'))
-const path = window.location.pathname
-const storageType = document.body.getAttribute('data-storage') || 'local'
-console.log(storageType)
-const store = new ManageStorage(path, storageType)
+const store = new ManageStorage()
 
 for (const [index, el] of editable.entries()) {
   // adjust data from storage

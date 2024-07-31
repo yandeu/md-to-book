@@ -5,6 +5,7 @@
  */
 
 import { addCssStringToDom } from './misc.esm.js'
+import { ManageStorage } from './store.js'
 
 var popup_editor_template = /* html */ `<!-- backdrop -->
 <style>
@@ -108,12 +109,14 @@ setTimeout(() => {
   `)
 
   if (jsLangElements.length > 0) {
+    const store = new ManageStorage()
+
     // import html-editor lib
     import('../lib/html-editor/html-editor.js').then(mod => {
-      const { init, openPreview, destroyAllTabs } = mod
+      const { init, openPreview, destroyAllTabs, getActiveTabText, setActiveTabText, getActiveTab } = mod
 
       // init editor
-      const add = async doc => {
+      const add = async (index, doc) => {
         if (doc.startsWith('data-url:')) {
           doc = doc.slice(9)
           doc = await (await fetch(doc)).text()
@@ -129,12 +132,14 @@ setTimeout(() => {
             }
           ],
           events: {
-            onSave: () => {
-              console.log('intercept save')
+            onSave: async () => {
+              const text = getActiveTabText()
+              await store.setDataByIndex(index, text)
               return true
             },
-            onLoad: () => {
-              console.log('onLoad event')
+            onLoad: async () => {
+              const text = await store.getDataByIndex(index)
+              setActiveTabText(text)
               return true
             }
           }
@@ -151,7 +156,7 @@ setTimeout(() => {
       document.head.append(styles)
 
       // do the magic
-      jsLangElements.forEach(a => {
+      jsLangElements.forEach((a, i) => {
         const hasActionAttribute = a.hasAttribute('data-action')
         // const doc = await(await fetch("/dist/book/test.js")).text()
         /** @type {HTMLElement} */
@@ -187,7 +192,7 @@ setTimeout(() => {
                 .join('')
             : 'data-url:' + a.getAttribute('data-url')
           add_popup_editor_template()
-          await add(code)
+          await add(i, code)
           const backdrop = document.getElementById('backdrop')
           const backdropCloseBtn = document.getElementById('backdrop-close-btn')
           backdropCloseBtn.addEventListener('click', () => {

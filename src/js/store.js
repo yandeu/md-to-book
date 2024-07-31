@@ -2,6 +2,8 @@
 
 /// <reference path="./types.d.ts" />
 
+import { set } from './misc.esm.js'
+
 /**
  *
  * @returns {Promise<boolean>}
@@ -11,11 +13,15 @@ const simulateRemoteDelay = () => new Promise(r => setTimeout(() => r(true), 200
 export class ManageStorage {
   /**
    * @param {string} path
-   * @param {"local" | "remote"} storageType
+   * @param {"local" | "remote" | null} storageType
    */
-  constructor(path, storageType) {
+  constructor(path = window.location.pathname, storageType = null) {
     this.path = path
     this.storageType = storageType
+
+    if (!this.storageType) {
+      this.storageType = document.body.getAttribute('data-storage') || 'local'
+    }
   }
 
   /**
@@ -29,6 +35,19 @@ export class ManageStorage {
       return data[index]
     }
     return null
+  }
+
+  /**
+   *
+   * @param {number} index
+   * @param {string} text
+   */
+  async setDataByIndex(index, text) {
+    const currData = await this.getData()
+    const newData = set(currData, index, text)
+
+    console.log('new data', index, text, newData)
+    this.setData(newData)
   }
 
   /**

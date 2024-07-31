@@ -17,3 +17,12 @@ export const escapeHtml = unsafe => {
       .replace(/'/g, '&apos;')
   return unsafe
 }
+
+// https://stackoverflow.com/a/38061142
+export function set(arr, index, val) {
+  if (index < arr.length) {
+    return [...arr.slice(0, index), val, ...arr.slice(index + 1)]
+  } else {
+    return [...arr, ...Array(index - arr.length), val]
+  }
+}
