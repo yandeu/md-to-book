@@ -155,6 +155,7 @@ small {
 
 a {
   color: var(--theme-hyperlink);
+  cursor: pointer;
   text-decoration: none;
 }
 
