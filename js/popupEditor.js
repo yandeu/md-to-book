@@ -203,6 +203,7 @@ setTimeout(() => {
               destroyAllTabs()
               backdrop.remove()
               remove_popup_editor_template()
+              document.body.style.overflow = 'unset'
             }, 300)
           })
           setTimeout(() => {
