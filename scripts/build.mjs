@@ -34,9 +34,11 @@ export const build = async (cwd = process.cwd()) => {
 
   const addChapters = (/** @type {string} */ index) => {
     let str = ''
+    let chapterNr = 0
     for (const p of book.sections) {
-      str += `<li>${p.title}<ol>`
+      str += `<li>${p.title}<ol start="${chapterNr}">`
       for (const f of p.files) {
+        chapterNr++
         str += `<li><a href="./book/${p.directory}/${f}.html">${f}</a></li>`
       }
       str += '</ol></li>'
