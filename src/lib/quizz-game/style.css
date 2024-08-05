@@ -1,0 +1,39 @@
+@import './fonts.css';
+
+#quizz_game_root {
+  --color-red: #fb7f7f;
+  --color-red-top: #ffb6b4;
+  --color-red-bottom: #ed5250;
+
+  --color-green: #9bd909;
+  --color-green-top: #c1e80d;
+  --color-green-bottom: #61b305;
+
+  --color-yellow: #feb112;
+  --color-yellow-top: #ffde0c;
+  --color-yellow-bottom: #fb9f0a;
+
+  --color-border: #000000;
+  --component-margin: 8px 1.5px;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  /* border: 1px black solid; */
+  padding: 8px;
+
+  height: 64px;
+
+  /* width: 100dvw;
+  height: 100dvh;
+  background-image: url(./assets/img/111936-OO1FXM-721-mod.jpg); */
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
+  position: relative;
+}
