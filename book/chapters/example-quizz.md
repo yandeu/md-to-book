@@ -1,27 +1,21 @@
-# JavaScript Code Example
+# Trivia Game
 
-A simple js snippet
+A simple trivia game integration
 
-```js
-let x = 5;
-x += 7;
+<script id="quizz_game_data" type="text/toml">
+[[questions]]
+title = "Wie viele Kantone gibt es in der Schweiz?"
+answers = [ 22, 25, 26, 28 ]
+correct = 2
 
-expect(x).toBe(12);
-```
+[[questions]]
+title = "Wann feiern die Schweizer den Nationalfeiertag?"
+answers = [ "5. Dezember", "27. Februar", "1. August", "31. Dezember" ]
+correct = 2
 
-<!-- // todo -->
-<!-- <script id="quizz-data" type="text/toml">
-
-</script> -->
-
-<div id="quizz_game_root"></div>
-
-<link rel="stylesheet" href="../../lib/quizz-game/style.css" />
-<link rel="stylesheet" href="../../lib/quizz-game/quizz-game.css" />
-
-<script async defer type="module">
-  import('../../lib/quizz-game/quizz-game.js').then(mod => {
-    const {init} = mod
-    init({ url: 'https://yandeu.github.io/quizz-game/assets/questions/test.toml', autoStart: false })
-  })
+[[questions]]
+title = "Wie gross ist die Schweiz (km²)?"
+answers = [ "41'000", "2'500", "55'000", "127'000" ]
+correct = 0
 </script>
+<div id="quizz_game_root"></div>
