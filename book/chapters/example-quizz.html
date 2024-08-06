@@ -102,18 +102,25 @@
       main()
     </script>
 
-    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/662124096c5ba5773d4b688b9acc7342.0fe2e451-52c4-47e0-af15-1e1f87de95bc.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/662124096c5ba5773d4b688b9acc7342.27e36e1a-ba86-4dc0-a916-c828930d125e.mp3"><audio controls></audio><span>x</span></div><h1>JavaScript Code Example</h1>
-<p>A simple js snippet</p>
-<pre><code class="language-js">let x = 5;
-x += 7;
+    <section><a class="no-print" href="../../">< back to overview</a><div id="audio-bar" class="no-print" data-marks-url="https://d1cm2ylv4x5tnt.cloudfront.net/b5c2786477392cace031cdb7f512ae27.486e5b7b-ca64-4a32-a584-c833563be6f4.marks" data-audio-url="https://d1cm2ylv4x5tnt.cloudfront.net/b5c2786477392cace031cdb7f512ae27.af656468-eb6a-40c2-b08e-82899da94b81.mp3"><audio controls></audio><span>x</span></div><h1>Trivia Game</h1>
+<p>A simple trivia game integration</p>
+<script id="quizz_game_data" type="text/toml">
+[[questions]]
+title = "Wie viele Kantone gibt es in der Schweiz?"
+answers = [ 22, 25, 26, 28 ]
+correct = 2
 
-expect(x).toBe(12);
-</code></pre>
-<p>Another snippet</p>
-<pre><code class="language-js">let hello = "JavaScript";
-editor.log(hello);
-</code></pre>
-<p>Load js snippet from url <a data-action="html-editor" data-url="../../book/test.js">(test.js)</a>.</p></section>
+[[questions]]
+title = "Wann feiern die Schweizer den Nationalfeiertag?"
+answers = [ "5. Dezember", "27. Februar", "1. August", "31. Dezember" ]
+correct = 2
+
+[[questions]]
+title = "Wie gross ist die Schweiz (km²)?"
+answers = [ "41'000", "2'500", "55'000", "127'000" ]
+correct = 0
+</script>
+<div id="quizz_game_root"></div></section>
 
     <script>
       hljs.highlightAll()

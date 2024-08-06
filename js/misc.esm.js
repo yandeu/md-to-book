@@ -6,6 +6,13 @@ export const addCssStringToDom = css => {
   document.head.append(style)
 }
 
+export const addCssFileToDom = path => {
+  const style = document.createElement('link')
+  style.rel = 'stylesheet'
+  style.href = path
+  document.head.append(style)
+}
+
 // https://stackoverflow.com/a/6234804
 export const escapeHtml = unsafe => {
   if (unsafe && typeof unsafe === 'string')
