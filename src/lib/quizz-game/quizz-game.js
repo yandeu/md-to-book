@@ -7950,11 +7950,11 @@ var Card = (props) => {
 
 // src/components/question.tsx
 var Question = (props) => {
-  console.log(props.total);
+  console.log("RENDER Question:", props.index, props.total);
   return /* @__PURE__ */ createNode("div", { class: question_default.question, children: /* @__PURE__ */ createNode(Card, { title: props.title, children: [
     props.children ? /* @__PURE__ */ createNode("div", { class: question_default.body, children: props.children }) : null,
-    /* @__PURE__ */ createNode("div", { class: question_default.answers, children: props.answers.map((a) => {
-      return /* @__PURE__ */ createNode(Button, { onClick: () => props.onNext?.(), children: a });
+    /* @__PURE__ */ createNode("div", { class: question_default.answers, children: props.answers.map((a, i) => {
+      return /* @__PURE__ */ createNode(Button, { onClick: () => props.onNext?.(i), children: a });
     }) }),
     /* @__PURE__ */ createNode("div", { class: question_default.timeline, children: /* @__PURE__ */ createNode("div", { children: Array.from(Array(props.total)).map((a, i) => {
       let c2 = "";
@@ -7966,28 +7966,69 @@ var Question = (props) => {
   ] }) });
 };
 
+// src/components/answers.tsx
+var ShowAnswers = class extends Component {
+  render() {
+    console.log("RENDER ShowAnswers:");
+    return /* @__PURE__ */ createNode("div", { style: "max-width:500px;", children: /* @__PURE__ */ createNode(Card, { title: "Your Answers", children: this.props.children }) });
+  }
+};
+
 // src/components/questions.tsx
 var Questions = class extends Component {
   constructor() {
     super(...arguments);
     this.index = 0;
+    this.answered = [];
+    this.finished = false;
+  }
+  didMount() {
+  }
+  onPrev() {
+    if (this.index <= 0) return;
+    this.index--;
+    this.update();
+  }
+  onNext(answer) {
+    this.answered[this.index] = answer;
+    if (this.index >= this.props.children.length - 1) {
+      this.finished = true;
+      this.update();
+      return;
+    }
+    this.index++;
+    this.update();
   }
   render() {
     const card2 = this.props.children[this.index];
-    card2.props.index = this.index;
-    card2.props.total = this.props.children.length;
-    console.log(this.props.children.length);
-    card2.props.onPrev = () => {
-      if (this.index <= 0) return;
-      this.index--;
-      this.update();
-    };
-    card2.props.onNext = () => {
-      if (this.index >= this.props.children.length - 1) return;
-      this.index++;
-      this.update();
-    };
-    return /* @__PURE__ */ createNode("div", { style: "max-width:500px;", children: this.props.children[this.index] });
+    card2.props.onPrev = this.onPrev.bind(this);
+    card2.props.onNext = this.onNext.bind(this);
+    console.log(card2);
+    if (!this.finished) {
+      return /* @__PURE__ */ createNode("div", { style: "max-width:500px;", children: this.props.children[this.index] });
+    } else {
+      let x = this.props.children.map((child, index) => {
+        let answered = this.answered[index];
+        let answeredText = child.props.answers[answered];
+        let correctAnswer = child.props.correct;
+        return { success: answered == correctAnswer, text: answeredText, question: child.props.title };
+      });
+      return /* @__PURE__ */ createNode(ShowAnswers, { children: /* @__PURE__ */ createNode("div", { style: "text-align:left;", children: [
+        /* @__PURE__ */ createNode("h2", { children: [
+          x.filter((a) => a.success).length,
+          "/",
+          x.length
+        ] }),
+        x.map((a) => {
+          let b2 = a.success === true ? "color: var(--color-green-bottom);" : "text-decoration: line-through var(--color-red-bottom);";
+          return /* @__PURE__ */ createNode("p", { children: [
+            a.question,
+            /* @__PURE__ */ createNode("br", {}),
+            /* @__PURE__ */ createNode("span", { style: b2, children: a.text })
+          ] });
+        })
+      ] }) });
+    }
   }
 };
 
@@ -17683,6 +17724,7 @@ var renderGame = async (url) => {
   root2.style.height = "100dvh";
   root2.style.maxWidth = "650px";
   root2.style.maxHeight = "450px";
+  root2.style.background = "#65a0f6";
   root2.style.backgroundImage = "url(./assets/img/111936-OO1FXM-721-mod.jpg)";
   root2.style.border = "1px black solid";
   root2.style.overflow = "hidden";
@@ -17693,7 +17735,16 @@ var renderGame = async (url) => {
   }
   const questions_toml = await res.text();
   const data = ze(questions_toml);
-  const App = (props) => /* @__PURE__ */ createNode("div", { class: app, children: /* @__PURE__ */ createNode(Questions, { children: data.questions.map((d2) => /* @__PURE__ */ createNode(Question, { title: d2.title, answers: d2.answers })) }) });
+  const App = (props) => /* @__PURE__ */ createNode("div", { class: app, children: /* @__PURE__ */ createNode(Questions, { children: data.questions.map((d2, i) => /* @__PURE__ */ createNode(
+    Question,
+    {
+      index: i,
+      total: data.questions.length,
+      title: d2.title,
+      answers: d2.answers,
+      correct: d2.correct
+    }
+  )) }) });
   render(/* @__PURE__ */ createNode(App, { name: "Nano" }), root2);
 };
 export {

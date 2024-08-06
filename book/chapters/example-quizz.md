@@ -22,6 +22,6 @@ expect(x).toBe(12);
 <script async defer type="module">
   import('../../lib/quizz-game/quizz-game.js').then(mod => {
     const {init} = mod
-    init({ url: 'http://localhost:5500/assets/questions/test.toml', autoStart: false })
+    init({ url: 'https://yandeu.github.io/quizz-game/assets/questions/test.toml', autoStart: false })
   })
 </script>
